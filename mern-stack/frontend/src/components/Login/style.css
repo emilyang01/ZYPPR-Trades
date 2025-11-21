@@ -1,0 +1,300 @@
+.login {
+  background-color: #ffffff;
+  min-height: 1024px;
+  min-width: 1440px;
+  position: relative;
+  width: 100%;
+}
+
+.login .image {
+  aspect-ratio: 0.67;
+  height: 1024px;
+  left: 690px;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  width: 750px;
+}
+
+/* Logo - Centered on LEFT side above form */
+.login .logo-centered {
+  position: absolute;
+  left: 340px;
+  top: 60px;
+  width: 120px;
+  height: auto;
+  z-index: 10;
+}
+
+.login .text-wrapper {
+  -webkit-text-stroke: 1px #000000;
+  color: #000000;
+  font-family: "Open Sans-Regular", Helvetica;
+  font-size: 45px;
+  font-weight: 400;
+  left: 107px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 224px;
+  white-space: nowrap;
+  width: 381px;
+}
+
+.login .div {
+  -webkit-text-stroke: 1px #000000;
+  color: #000000;
+  font-family: "Open Sans-Regular", Helvetica;
+  font-size: 18px;
+  font-weight: 400;
+  left: 107px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 281px;
+}
+
+.login .text-wrapper-2 {
+  -webkit-text-stroke: 1px #000000;
+  color: #000000;
+  font-family: "Open Sans-Regular", Helvetica;
+  font-size: 16px;
+  font-weight: 400;
+  left: 107px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 364px;
+}
+
+.login .rectangle {
+  background-color: var(--custom-style-color-1);
+  border: 2px solid;
+  border-color: #858585;
+  border-radius: 50px;
+  height: 45px;
+  left: 106px;
+  position: absolute;
+  top: 390px;
+  width: 472px;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  transition: border-color 0.3s ease;
+}
+
+.login .rectangle:hover {
+  border-color: #0b6fff;
+}
+
+.login .rectangle.input-error {
+  border-color: #DC2626;
+  background-color: #FEE2E2;
+}
+
+.login .text-wrapper-3 {
+  -webkit-text-stroke: 1px #000000;
+  color: #000000;
+  font-family: "Open Sans-Regular", Helvetica;
+  font-size: 16px;
+  font-weight: 400;
+  left: 107px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 475px;
+}
+
+.login .rectangle-2 {
+  background-color: var(--custom-style-color-1);
+  border: 2px solid;
+  border-color: #858585;
+  border-radius: 50px;
+  height: 45px;
+  left: 106px;
+  position: absolute;
+  top: 505px;
+  width: 472px;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  transition: border-color 0.3s ease;
+}
+
+.login .rectangle-2:hover {
+  border-color: #0b6fff;
+}
+
+.login .rectangle-2.input-error {
+  border-color: #DC2626;
+  background-color: #FEE2E2;
+}
+
+.login .text-wrapper-4 {
+  color: #00000080;
+  font-family: "Open Sans-Regular", Helvetica;
+  font-size: 16px;
+  font-weight: 400;
+  left: 457px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 476px;
+  transition: color 0.3s ease;
+}
+
+.login .text-wrapper-4:hover {
+  color: #0b6fff;
+  text-decoration: underline;
+}
+
+.login .text-wrapper-7 {
+  -webkit-text-stroke: 1px #000000;
+  color: #000000;
+  font-family: "Open Sans-Regular", Helvetica;
+  font-size: 16px;
+  font-weight: 400;
+  left: 205px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 658px;
+}
+
+.login .text-wrapper-8 {
+  color: #0b6fff;
+  font-family: "Open Sans-Regular", Helvetica;
+  font-size: 16px;
+  font-weight: 400;
+  left: 383px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 659px;
+  transition: color 0.3s ease;
+  cursor: pointer;
+}
+
+.login .text-wrapper-8:hover {
+  color: #0952cc;
+  text-decoration: underline;
+}
+
+.login .rectangle-3 {
+  background-color: #0b6fff;
+  border-radius: 50px;
+  height: 48px;
+  left: 108px;
+  position: absolute;
+  top: 602px;
+  width: 468px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+.login .rectangle-3:hover:not(:disabled) {
+  background-color: #0952cc;
+  transform: translateY(-2px);
+}
+
+.login .rectangle-3:disabled {
+  background-color: #93c5fd;
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.login .text-wrapper-9 {
+  color: #ffffff;
+  font-family: "Open Sans-Regular", Helvetica;
+  font-size: 25px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.login .input-field {
+  width: 100%;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-family: "Open Sans-Regular", Helvetica;
+  font-size: 16px;
+  color: #000000;
+}
+
+.login .input-field::placeholder {
+  color: #0000004c;
+}
+
+.login .input-field:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Back Button Styles */
+.login .back-button {
+  position: absolute;
+  left: 40px;
+  top: 70px;
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000000;
+  transition: all 0.3s ease;
+  z-index: 100;
+  padding: 0;
+}
+
+.login .back-button:hover {
+  color: #0b6fff;
+  transform: translateX(-3px);
+}
+
+.login .error-banner {
+  position: absolute;
+  top: 320px;
+  left: 106px;
+  width: 472px;
+  background-color: #FEE2E2;
+  border: 1px solid #DC2626;
+  border-radius: 8px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  animation: slideDown 0.3s ease;
+  z-index: 10;
+}
+
+.login .success-banner {
+  position: absolute;
+  top: 320px;
+  left: 106px;
+  width: 472px;
+  background-color: #D1FAE5;
+  border: 1px solid #16A34A;
+  border-radius: 8px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  animation: slideDown 0.3s ease;
+  z-index: 10;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
