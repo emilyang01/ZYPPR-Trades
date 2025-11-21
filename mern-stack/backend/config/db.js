@@ -6,7 +6,7 @@ export async function connectDB(uri = process.env.MONGO_URI) {
   mongoose.set("strictQuery", true);
 
   // Optional: set a db name if your Atlas URI doesn't include one
-  // const opts = { dbName: "zyprr_trades" };
+  // const opts = { dbName: "zyppr_trades" };
   // await mongoose.connect(uri, opts);
 
   const conn = await mongoose.connect(uri);
