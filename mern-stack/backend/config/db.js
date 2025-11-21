@@ -1,15 +1,22 @@
 // backend/config/db.js
 import mongoose from "mongoose";
 
+/**
+ * Connect to MongoDB using Mongoose
+ * @param {string} uri - Mongo connection string (defaults to process.env.MONGO_URI)
+ */
 export async function connectDB(uri = process.env.MONGO_URI) {
-  if (!uri) throw new Error("Missing MONGO_URI in env");
-  mongoose.set("strictQuery", true);
+  if (!uri) {
+    throw new Error("Missing MONGO_URI in env");
+  }
 
-  // Optional: set a db name if your Atlas URI doesn't include one
-  // const opts = { dbName: "zyppr_trades" };
-  // await mongoose.connect(uri, opts);
+  try {
+    mongoose.set("strictQuery", true);
 
-  const conn = await mongoose.connect(uri);
-  console.log(`✅ MongoDB connected: ${conn.connection.host}`);
-  return conn;
+    const conn = await mongoose.connect(uri);
+    console.log("✅ MongoDB connected:", conn.connection.host);
+  } catch (err) {
+    console.error("❌ MongoDB connection error:", err.message);
+    throw err;
+  }
 }
