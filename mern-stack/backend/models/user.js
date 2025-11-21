@@ -35,6 +35,3 @@ UserSchema.methods.matchPassword = function(candidate) {
 };
 
 export default mongoose.model("user", UserSchema);
-
-
-
