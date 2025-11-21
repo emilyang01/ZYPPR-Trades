@@ -1,19 +1,16 @@
-import express from "express";
-import dotenv from "dotenv";
-import { connectDB } from "./config/db.js";
-
-
+const express = require('express');
+const dotenv = require('dotenv');
+const connectDB = require('./config/db');
 
 dotenv.config();
-console.log("MONGO_URI:", process.env.MONGO_URI); // Debug
 connectDB();
 
 const app = express();
+app.use(express.json());
 
-app.get("/", (req, res) => {
-  res.send("Server is ready");
-});
+// Routes
+app.use('/api/auth', require('./routes/auth'));   // Existing auth.js
+app.use('/api/admin', require('./routes/admin')); // Existing admin.js
 
-app.listen(5000, () => {
-  console.log("Server started at http://localhost:5000");
-});
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(` Server running on port ${PORT}`));
