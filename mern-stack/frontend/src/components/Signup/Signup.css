@@ -1,0 +1,144 @@
+.sign-up {
+  background-color: #ffffff;
+  min-height: 1024px;
+  min-width: 1440px;
+  position: relative;
+  width: 100%;
+}
+
+.sign-up .image {
+  aspect-ratio: 0.67;
+  height: 1024px;
+  left: 690px;
+  position: absolute;
+  top: 0;
+  width: 750px;
+  object-fit: cover;
+}
+
+.sign-up .logo-centered {
+  position: absolute;
+  left: 340px;
+  top: 60px;
+  width: 120px;
+  height: auto;
+}
+
+.sign-up .text-wrapper-2 {
+  font-size: 45px;
+  color: #000;
+  position: absolute;
+  top: 175px;
+  left: 114px;
+}
+
+.sign-up .text-wrapper-3,
+.sign-up .text-wrapper-email,
+.sign-up .text-wrapper-password {
+  font-size: 16px;
+  color: #000;
+  position: absolute;
+  left: 114px;
+}
+
+.sign-up .text-wrapper-3 {
+  top: 292px;
+}
+
+.sign-up .text-wrapper-email {
+  top: 413px;
+}
+
+.sign-up .text-wrapper-password {
+  top: 535px;
+}
+
+.sign-up .rectangle-2,
+.sign-up .rectangle,
+.sign-up .rectangle-3 {
+  background-color: #fff;
+  border: 2px solid #858585;
+  border-radius: 50px;
+  height: 45px;
+  left: 109px;
+  width: 472px;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  position: absolute;
+}
+
+.sign-up .rectangle-2 {
+  top: 324px;
+}
+
+.sign-up .rectangle {
+  top: 443px;
+}
+
+.sign-up .rectangle-3 {
+  top: 565px;
+}
+
+.sign-up .rectangle-2:hover,
+.sign-up .rectangle:hover,
+.sign-up .rectangle-3:hover {
+  border-color: #0b6fff;
+}
+
+.sign-up .rectangle-4 {
+  background-color: #0b6fff;
+  border-radius: 50px;
+  height: 48px;
+  width: 468px;
+  position: absolute;
+  top: 650px;
+  left: 111px;
+  border: none;
+  cursor: pointer;
+  color: #fff;
+  font-size: 25px;
+}
+
+.sign-up .rectangle-4:hover {
+  background-color: #0952cc;
+}
+
+.sign-up .input-field {
+  width: 100%;
+  border: none;
+  background: transparent;
+  font-size: 16px;
+  outline: none;
+}
+
+.sign-up .text-wrapper-8 {
+  color: #000;
+  position: absolute;
+  top: 710px;
+  left: 210px;
+}
+
+.sign-up .text-wrapper-9 {
+  color: #0b6fff;
+  position: absolute;
+  top: 711px;
+  left: 405px;
+  cursor: pointer;
+}
+
+.sign-up .text-wrapper-9:hover {
+  color: #0952cc;
+}
+
+.error-banner {
+  position: absolute;
+  top: 230px;
+  left: 109px;
+  width: 472px;
+  background-color: #fee2e2;
+  border: 1px solid #dc2626;
+  padding: 12px 16px;
+  border-radius: 8px;
+  color: #dc2626;
+}
