@@ -1,20 +1,49 @@
+import express from "express";
+import cors from "cors";
+import dotenv from "dotenv";
+import { connectDB } from "./config/db.js";
 
-app.use('/api/messages', require('./routes/message'));
-app.use('/api/notifications', require('./routes/notification'));
+// Import backend routes
+import authRoutes from "./routes/auth.js";
+import adminRoutes from "./routes/admin.js";
+import meRoutes from "./routes/me.js";
+import messageRoutes from "./routes/message.js";
+import notificationRoutes from "./routes/notification.js";
 
-const express = require('express');
-const dotenv = require('dotenv');
-const connectDB = require('./config/db');
+// Load env vars from .env in the mern-stack root
+dotenv.config({ path: ".env", override: true });
 
-dotenv.config();
-connectDB();
+// Debug: confirm MONGO_URI is loaded
+console.log(
+  "Loaded MONGO_URI:",
+  process.env.MONGO_URI ? "✅ Found" : "❌ Missing"
+);
 
 const app = express();
+app.use(cors());
 app.use(express.json());
 
-// Routes
-app.use('/api/auth', require('./routes/auth'));   // Existing auth.js
-app.use('/api/admin', require('./routes/admin')); // Existing admin.js
+// Simple health check
+app.get("/api/health", (_req, res) => res.json({ ok: true }));
 
+// Mount routes
+app.use("/api/auth", authRoutes);
+app.use("/api/admin", adminRoutes);
+app.use("/api", meRoutes); // e.g. /api/me
+app.use("/api/messages", messageRoutes);
+app.use("/api/notifications", notificationRoutes);
+
+// Port
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(` Server running on port ${PORT}`));
+
+// Connect to MongoDB and start server
+try {
+  await connectDB(); // connectDB reads process.env.MONGO_URI internally
+  app.listen(PORT, () => {
+    console.log("✅ MongoDB connected");
+    console.log(`🚀 Server running at: http://localhost:${PORT}`);
+  });
+} catch (err) {
+  console.error("❌ DB connect error:", err.message);
+  process.exit(1);
+}
