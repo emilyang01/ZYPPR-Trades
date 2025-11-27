@@ -1,3 +1,7 @@
+
+app.use('/api/messages', require('./routes/message'));
+app.use('/api/notifications', require('./routes/notification'));
+
 const express = require('express');
 const dotenv = require('dotenv');
 const connectDB = require('./config/db');
