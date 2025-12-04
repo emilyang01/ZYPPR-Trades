@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./Signup.css";
+import "./style.css";
 import "./styleguide.css";
 import image14 from "./image-14.png";
 import logo from "./logo.png";
@@ -43,6 +43,10 @@ export const Login = () => {
 
     setIsLoading(true);
     try {
+      // TODO: REMOVE THIS MOCK LOGIN BLOCK WHEN BACKEND IS READY
+      // This is temporary for frontend-only testing without backend connection
+      // Original API call code is commented below:
+      /*
       const res = await fetch("http://localhost:5000/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -57,6 +61,14 @@ export const Login = () => {
       }
       localStorage.setItem("authToken", data.token);
       localStorage.setItem("user", JSON.stringify(data.user));
+      */
+      
+      // MOCK LOGIN: Replace with real API call above
+      const mockToken = "mock-token-" + Date.now();
+      const mockUser = { id: "user-" + Date.now(), email, role: "user", name: email.split("@")[0] };
+      localStorage.setItem("authToken", mockToken);
+      localStorage.setItem("user", JSON.stringify(mockUser));
+      
       setSuccessMessage("Login successful! Redirecting...");
       setTimeout(() => navigate("/dashboard"), 1000);
     } catch (err) {
