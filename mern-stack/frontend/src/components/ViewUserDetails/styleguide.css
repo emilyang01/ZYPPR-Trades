@@ -1,0 +1,241 @@
+:root {
+  --body-base-font-family: "Inter", Helvetica;
+  --body-base-font-size: 16px;
+  --body-base-font-style: normal;
+  --body-base-font-weight: 400;
+  --body-base-letter-spacing: 0px;
+  --body-base-line-height: 139.9999976158142%;
+  --body-strong-font-family: "Inter", Helvetica;
+  --body-strong-font-size: 16px;
+  --body-strong-font-style: normal;
+  --body-strong-font-weight: 600;
+  --body-strong-letter-spacing: 0px;
+  --body-strong-line-height: 139.9999976158142%;
+  --collection-1-boolean: none;
+  --color-background-brand-default: var(--color-primitives-brand-800);
+  --color-background-brand-hover: var(--color-primitives-brand-900);
+  --color-background-brand-tertiary: var(--color-primitives-brand-100);
+  --color-background-default-default: var(--color-primitives-white-1000);
+  --color-background-default-secondary: var(--color-primitives-gray-100);
+  --color-background-default-secondary-hover: var(--color-primitives-gray-200);
+  --color-background-neutral-tertiary: var(--color-primitives-slate-200);
+  --color-background-neutral-tertiary-hover: var(--color-primitives-slate-300);
+  --color-border-brand-default: var(--color-primitives-brand-800);
+  --color-border-default-default: var(--color-primitives-gray-300);
+  --color-border-neutral-secondary: var(--color-primitives-slate-600);
+  --color-primitives-brand-100: rgba(245, 245, 245, 1);
+  --color-primitives-brand-300: rgba(217, 217, 217, 1);
+  --color-primitives-brand-600: rgba(68, 68, 68, 1);
+  --color-primitives-brand-800: rgba(44, 44, 44, 1);
+  --color-primitives-brand-900: rgba(30, 30, 30, 1);
+  --color-primitives-brand-b-800: rgba(119, 0, 0, 1);
+  --color-primitives-gray-100: rgba(245, 245, 245, 1);
+  --color-primitives-gray-200: rgba(230, 230, 230, 1);
+  --color-primitives-gray-300: rgba(217, 217, 217, 1);
+  --color-primitives-gray-400: rgba(179, 179, 179, 1);
+  --color-primitives-gray-500: rgba(117, 117, 117, 1);
+  --color-primitives-gray-600: rgba(68, 68, 68, 1);
+  --color-primitives-gray-800: rgba(44, 44, 44, 1);
+  --color-primitives-gray-900: rgba(30, 30, 30, 1);
+  --color-primitives-slate-1000: rgba(36, 36, 36, 1);
+  --color-primitives-slate-200: rgba(227, 227, 227, 1);
+  --color-primitives-slate-300: rgba(205, 205, 205, 1);
+  --color-primitives-slate-500: rgba(148, 148, 148, 1);
+  --color-primitives-slate-600: rgba(118, 118, 118, 1);
+  --color-primitives-slate-900: rgba(48, 48, 48, 1);
+  --color-primitives-white-1000: rgba(255, 255, 255, 1);
+  --color-primitives-white-400: rgba(255, 255, 255, 0.4);
+  --color-primitives-white-500: rgba(255, 255, 255, 0.7);
+  --color-text-brand-on-brand: var(--color-primitives-brand-100);
+  --color-text-brand-on-brand-secondary: var(--color-primitives-brand-900);
+  --color-text-default-default: var(--color-primitives-gray-900);
+  --color-text-default-secondary: var(--color-primitives-gray-500);
+  --color-text-default-tertiary: var(--color-primitives-gray-400);
+  --colors-black-4: rgba(0, 0, 0, 0.04);
+  --colors-black-80: rgba(0, 0, 0, 0.8);
+  --corner-radius-8: 8px;
+  --heading-font-family: "Inter", Helvetica;
+  --heading-font-size: 24px;
+  --heading-font-style: normal;
+  --heading-font-weight: 600;
+  --heading-letter-spacing: -0.48px;
+  --heading-line-height: 120.00000476837158%;
+  --icon-size-16: 16px;
+  --icon-size-20: 20px;
+  --responsive-device-width: 1200px;
+  --show-or-hide-2-show-or-hide-2: initial;
+  --single-line-body-base-font-family: "Inter", Helvetica;
+  --single-line-body-base-font-size: 16px;
+  --single-line-body-base-font-style: normal;
+  --single-line-body-base-font-weight: 400;
+  --single-line-body-base-letter-spacing: 0px;
+  --single-line-body-base-line-height: 100%;
+  --size-icon-large: 40px;
+  --size-radius-200: 8px;
+  --size-radius-full: 9999px;
+  --size-space-050: 2px;
+  --size-space-1200: 48px;
+  --size-space-1600: 64px;
+  --size-space-200: 8px;
+  --size-space-300: 12px;
+  --size-space-600: 24px;
+  --size-space-800: 32px;
+  --subheading-font-family: "Inter", Helvetica;
+  --subheading-font-size: 20px;
+  --subheading-font-style: normal;
+  --subheading-font-weight: 400;
+  --subheading-letter-spacing: 0px;
+  --subheading-line-height: 120.00000476837158%;
+  --typography-primitives-scale-06: 32px;
+  --ZYPPR-default-font-family: "Open Sans", Helvetica;
+  --ZYPPR-default-font-size: 16px;
+  --ZYPPR-default-font-style: normal;
+  --ZYPPR-default-font-weight: 400;
+  --ZYPPR-default-letter-spacing: 0px;
+  --ZYPPR-default-line-height: normal;
+}
+
+/*
+
+To enable a theme in your HTML, simply add one of the following data attributes to an HTML element, like so:
+
+<body data-corner-radius-mode="standard">
+    <!-- the rest of your content -->
+</body>
+
+You can apply the theme on any DOM node, not just the `body`
+
+*/
+
+[data-corner-radius-mode="standard"] {
+  --corner-radius-8: 8px;
+}
+
+[data-corner-radius-mode="expanded-4"] {
+  --corner-radius-8: 12px;
+}
+
+[data-corner-radius-mode="expanded-8"] {
+  --corner-radius-8: 16px;
+}
+
+[data-corner-radius-mode="condensed-4"] {
+  --corner-radius-8: 4px;
+}
+
+[data-icon-size-mode="standard"] {
+  --icon-size-16: 16px;
+  --icon-size-20: 20px;
+}
+
+[data-icon-size-mode="expanded-4"] {
+  --icon-size-16: 20px;
+  --icon-size-20: 24px;
+}
+
+[data-icon-size-mode="expanded-8"] {
+  --icon-size-16: 24px;
+  --icon-size-20: 28px;
+}
+
+[data-icon-size-mode="condensed-4"] {
+  --icon-size-16: 12px;
+  --icon-size-20: 16px;
+}
+
+[data-color-mode="SDS-light"] {
+  --color-background-brand-default: var(--color-primitives-brand-800);
+  --color-background-brand-hover: var(--color-primitives-brand-900);
+  --color-background-brand-tertiary: var(--color-primitives-brand-100);
+  --color-background-default-default: var(--color-primitives-white-1000);
+  --color-background-default-secondary: var(--color-primitives-gray-100);
+  --color-background-default-secondary-hover: var(--color-primitives-gray-200);
+  --color-background-neutral-tertiary: var(--color-primitives-slate-200);
+  --color-background-neutral-tertiary-hover: var(--color-primitives-slate-300);
+  --color-border-brand-default: var(--color-primitives-brand-800);
+  --color-border-default-default: var(--color-primitives-gray-300);
+  --color-border-neutral-secondary: var(--color-primitives-slate-600);
+  --color-text-brand-on-brand: var(--color-primitives-brand-100);
+  --color-text-brand-on-brand-secondary: var(--color-primitives-brand-900);
+  --color-text-default-default: var(--color-primitives-gray-900);
+  --color-text-default-secondary: var(--color-primitives-gray-500);
+  --color-text-default-tertiary: var(--color-primitives-gray-400);
+}
+
+[data-color-mode="SDS-dark"] {
+  --color-background-brand-default: var(--color-primitives-brand-100);
+  --color-background-brand-hover: var(--color-primitives-brand-300);
+  --color-background-brand-tertiary: var(--color-primitives-brand-600);
+  --color-background-default-default: var(--color-primitives-gray-900);
+  --color-background-default-secondary: var(--color-primitives-gray-800);
+  --color-background-default-secondary-hover: var(--color-primitives-gray-900);
+  --color-background-neutral-tertiary: var(--color-primitives-slate-900);
+  --color-background-neutral-tertiary-hover: var(--color-primitives-slate-1000);
+  --color-border-brand-default: var(--color-primitives-brand-100);
+  --color-border-default-default: var(--color-primitives-gray-600);
+  --color-border-neutral-secondary: var(--color-primitives-slate-500);
+  --color-text-brand-on-brand: var(--color-primitives-brand-900);
+  --color-text-brand-on-brand-secondary: var(--color-primitives-brand-100);
+  --color-text-default-default: var(--color-primitives-white-1000);
+  --color-text-default-secondary: var(--color-primitives-white-500);
+  --color-text-default-tertiary: var(--color-primitives-white-400);
+}
+
+[data-color-mode="brand-b-light"] {
+  --color-background-brand-default: var(--color-primitives-brand-b-800);
+  --color-background-brand-hover: var(--color-primitives-brand-900);
+  --color-background-brand-tertiary: var(--color-primitives-brand-100);
+  --color-background-default-default: var(--color-primitives-white-1000);
+  --color-background-default-secondary: var(--color-primitives-gray-100);
+  --color-background-default-secondary-hover: var(--color-primitives-gray-200);
+  --color-background-neutral-tertiary: var(--color-primitives-slate-200);
+  --color-background-neutral-tertiary-hover: var(--color-primitives-slate-300);
+  --color-border-brand-default: var(--color-primitives-brand-800);
+  --color-border-default-default: var(--color-primitives-gray-300);
+  --color-border-neutral-secondary: var(--color-primitives-slate-600);
+  --color-text-brand-on-brand: var(--color-primitives-brand-100);
+  --color-text-brand-on-brand-secondary: var(--color-primitives-brand-900);
+  --color-text-default-default: var(--color-primitives-gray-900);
+  --color-text-default-secondary: var(--color-primitives-gray-500);
+  --color-text-default-tertiary: var(--color-primitives-gray-400);
+}
+
+[data-show-or-hide-2-mode="true"] {
+  --show-or-hide-2-show-or-hide-2: initial;
+}
+
+[data-show-or-hide-2-mode="false"] {
+  --show-or-hide-2-show-or-hide-2: none;
+}
+
+[data-responsive-mode="desktop"] {
+  --responsive-device-width: 1200px;
+}
+
+[data-responsive-mode="mobile"] {
+  --responsive-device-width: 375px;
+}
+
+[data-responsive-mode="tablet"] {
+  --responsive-device-width: 768px;
+}
+
+[data-colors-mode="snowui-light"] {
+  --colors-black-4: rgba(0, 0, 0, 0.04);
+  --colors-black-80: rgba(0, 0, 0, 0.8);
+}
+
+[data-colors-mode="snowui-dark"] {
+  --colors-black-4: rgba(255, 255, 255, 0.1);
+  --colors-black-80: rgba(255, 255, 255, 0.8);
+}
+
+[data-colors-mode="ios-macos-light"] {
+  --colors-black-4: rgba(0, 0, 0, 0.04);
+  --colors-black-80: rgba(0, 0, 0, 0.8);
+}
+
+[data-colors-mode="ios-macos-dark"] {
+  --colors-black-4: rgba(255, 255, 255, 0.1);
+  --colors-black-80: rgba(255, 255, 255, 0.8);
+}
