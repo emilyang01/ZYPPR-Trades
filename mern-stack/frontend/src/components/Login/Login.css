@@ -1,0 +1,179 @@
+.login {
+  background-color: #ffffff;
+  min-height: 1024px;
+  min-width: 1440px;
+  position: relative;
+  width: 100%;
+}
+
+.login .image {
+  aspect-ratio: 0.67;
+  height: 1024px;
+  left: 690px;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  width: 750px;
+}
+
+.login .logo-centered {
+  position: absolute;
+  left: 340px;
+  top: 60px;
+  width: 120px;
+  height: auto;
+  z-index: 10;
+}
+
+.login .text-wrapper {
+  -webkit-text-stroke: 1px #000000;
+  color: #000000;
+  font-family: "Open Sans", Helvetica;
+  font-size: 45px;
+  font-weight: 400;
+  left: 107px;
+  position: absolute;
+  top: 224px;
+}
+
+.login .div {
+  color: #000000;
+  font-family: "Open Sans", Helvetica;
+  font-size: 18px;
+  font-weight: 400;
+  left: 107px;
+  position: absolute;
+  top: 281px;
+}
+
+.login .text-wrapper-2 {
+  color: #000000;
+  font-family: "Open Sans", Helvetica;
+  font-size: 16px;
+  position: absolute;
+  top: 364px;
+  left: 107px;
+}
+
+.login .rectangle {
+  background-color: #ffffff;
+  border: 2px solid #858585;
+  border-radius: 50px;
+  height: 45px;
+  position: absolute;
+  top: 390px;
+  left: 106px;
+  width: 472px;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.login .rectangle-2 {
+  background-color: #ffffff;
+  border: 2px solid #858585;
+  border-radius: 50px;
+  height: 45px;
+  position: absolute;
+  top: 505px;
+  left: 106px;
+  width: 472px;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.login .rectangle:hover,
+.login .rectangle-2:hover {
+  border-color: #0b6fff;
+}
+
+.login .text-wrapper-3 {
+  color: #000000;
+  font-family: "Open Sans", Helvetica;
+  font-size: 16px;
+  position: absolute;
+  top: 475px;
+  left: 107px;
+}
+
+.login .text-wrapper-4 {
+  color: #00000080;
+  font-family: "Open Sans", Helvetica;
+  font-size: 16px;
+  position: absolute;
+  top: 476px;
+  left: 457px;
+  cursor: pointer;
+}
+
+.login .text-wrapper-4:hover {
+  color: #0b6fff;
+  text-decoration: underline;
+}
+
+.login .rectangle-3 {
+  background-color: #0b6fff;
+  border: none;
+  border-radius: 50px;
+  height: 48px;
+  position: absolute;
+  top: 602px;
+  left: 108px;
+  width: 468px;
+  cursor: pointer;
+  color: #fff;
+  font-size: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login .rectangle-3:hover {
+  background-color: #0952cc;
+}
+
+.login .input-field {
+  width: 100%;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 16px;
+  color: #000;
+}
+
+.login .input-field::placeholder {
+  color: #0000004c;
+}
+
+.login .text-wrapper-7 {
+  color: #000;
+  position: absolute;
+  top: 658px;
+  left: 205px;
+}
+
+.login .text-wrapper-8 {
+  color: #0b6fff;
+  position: absolute;
+  top: 659px;
+  left: 383px;
+  cursor: pointer;
+}
+
+.login .text-wrapper-8:hover {
+  color: #0952cc;
+  text-decoration: underline;
+}
+
+.error-banner {
+  position: absolute;
+  top: 320px;
+  left: 106px;
+  width: 472px;
+  background-color: #fee2e2;
+  border: 1px solid #dc2626;
+  padding: 12px 16px;
+  border-radius: 8px;
+  color: #dc2626;
+}
