@@ -1,23 +1,26 @@
 import mongoose from "mongoose";
 
+//lets talk about user vs profile schema. Does that make filering more complicated?
+
     // profile references user
 const ProfileSchema = new mongoose.Schema({
     user: { type: mongoose.Schema.Types.ObjectId, ref: "user", required: true },
-    profilePicture: { type: String, trim: true },        // <-- stores path or URL
-    bio: { type: string, required: false, trim: true},
-    skills: { type: string, required: false},
-    resume: { type: String, trim: true },
-    currentJobs: [{ type: mongoose.Schema.Types.ObjectId, ref: "job" }],                     //array of jobs ([that's what the square brackets mean])
+    profilePicture: { url: { type: String, required: true } },        // <-- stores path or URL
+    bio: { type: String, required: false, trim: true},
+    is_verified: { Boolean: false }, //note: no camel case
+    skills: [{ type: String, required: false}],
+    experience_level: { type: String },
+    resume: { url: { type: String, required: true } },
+    currentJobs: [{ type: mongoose.Schema.Types.ObjectId, ref: "job" }],
     jobs_completed: [{ type: mongoose.Schema.Types.ObjectId, ref: "job" }],
-    total_earnings: { type: Number, default: 0 },        //TODO: there should be a function that returns daily earnings and weekly earnings.
-    received_reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: "review"}],               //array of reviews
-    settings_profile:{},
-    list_of_followers: {},
-    list_of_following:{},
-    count_of_followers: {},
-    count_of_following: {},
-    //zipcode?
-    
+    total_earnings: { type: Number, default: 0 },
+    reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: "review"}],
+    settings_profile:{ type: mongoose.Schema.Types.ObjectId, ref: "settings_profile", required: true },
+    list_of_followers: [{ type: mongoose.Schema.Types.ObjectId, ref: "user" }],
+    list_of_following:[{ type: mongoose.Schema.Types.ObjectId, ref: "user" }],
+    count_of_followers: { type: Number, default: 0 },
+    count_of_following: { type: Number, default: 0 },
+    category: { type: String, trim: true},
 }, { timestamps: true });
 
 export default mongoose.model("profile", ProfileSchema);
