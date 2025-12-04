@@ -2,21 +2,14 @@ import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 
 const UserSchema = new mongoose.Schema({
-    user_id: { type: String },
+    id: { type: String },
     first_name: { type: String, required: true, trim: true},
     last_name: { type: String, required: true, trim: true},
     email: { type: String, required: true, unique: true, lowercase: true, trim: true },
     password_hash: { type: String, required: true, minlength: 8, select: false },
     role: { type: String, enum: ["user", "admin"], default: "user" },
-    //city: { type: String, required: true},
-    username: { type: String, required: true, unique: true},
-    //category: { type: String, trim: true},
-    //rating: { type: Decimal128 },
-    //is_verified: { Boolean: false }, no camel case
-    current_jobs: [{ //new
-      url: { type: String, required: true },
-      filename: String,
-    }]
+    city: { type: String, required: true},
+    //hourly rate should probably be a job schema and not a user schema
 }, { timestamps: true });
 
 // Hash password before saving
