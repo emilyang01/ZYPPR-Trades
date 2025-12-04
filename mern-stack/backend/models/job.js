@@ -12,6 +12,7 @@ const JobSchema = new mongoose.Schema({
     attachments: [{
       url: { type: String, required: true },
       filename: String,
+      mimeType: String
     }], 
     applicants: [{ type: mongoose.Schema.Types.ObjectId, ref: "user" }],
     reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: "review"}],
