@@ -1,30 +1,37 @@
+import Message from "../models/Message.js";
+import Notification from "../models/Notification.js";
 
-const Message = require('../models/Message');
-const Notification = require('../models/Notification');
-
-exports.sendMessage = async (req, res) => {
+export const sendMessage = async (req, res) => {
   try {
     const { senderId, receiverId, content } = req.body;
+
     const message = await Message.create({ senderId, receiverId, content });
 
-    // Trigger notification for receiver
+    // Create notification using your schema fields
     await Notification.create({
-      userId: receiverId,
-      type: 'message',
-      message: `New message from ${senderId}`
+      user: receiverId,            // matches schema
+      fromUser: senderId,          // matches schema
+      type: "message",
+      message: `New message from ${senderId}`,
+      messageRef: message._id,     // optional but useful
     });
 
     res.status(201).json(message);
   } catch (error) {
+    console.error("Error in sendMessage:", error);
     res.status(500).json({ error: error.message });
   }
 };
 
-exports.getMessages = async (req, res) => {
+export const getMessages = async (req, res) => {
   try {
-    const messages = await Message.find({ receiverId: req.params.userId });
+    const messages = await Message.find({
+      receiverId: req.params.userId,
+    });
+
     res.json(messages);
   } catch (error) {
+    console.error("Error in getMessages:", error);
     res.status(500).json({ error: error.message });
   }
 };

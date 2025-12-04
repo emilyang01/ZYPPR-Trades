@@ -1,9 +1,13 @@
+// backend/routes/message.js
+import express from "express";
+import { sendMessage, getMessages } from "../controllers/messageController.js";
 
-const express = require('express');
 const router = express.Router();
-const { sendMessage, getMessages } = require('../controllers/messageController');
 
-router.post('/send', sendMessage);
-router.get('/:userId', getMessages);
+// POST /api/messages/send
+router.post("/send", sendMessage);
 
-module.exports = router;
+// GET /api/messages/:userId
+router.get("/:userId", getMessages);
+
+export default router;
