@@ -1,7 +1,5 @@
 import mongoose from "mongoose";
 
-//lets talk about user vs profile schema. Does that make filering more complicated?
-
     // profile references user
 const ProfileSchema = new mongoose.Schema({
     user: { type: mongoose.Schema.Types.ObjectId, ref: "user", required: true },
