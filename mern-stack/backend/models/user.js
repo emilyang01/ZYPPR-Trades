@@ -2,25 +2,22 @@ import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 
 const UserSchema = new mongoose.Schema({
-    first_name: { type: string, required: true, trim: true},
-    last_name: { type: string, required: true, trim: true},
+    user_id: { type: String },
+    first_name: { type: String, required: true, trim: true},
+    last_name: { type: String, required: true, trim: true},
     email: { type: String, required: true, unique: true, lowercase: true, trim: true },
     password_hash: { type: String, required: true, minlength: 8, select: false },
     role: { type: String, enum: ["user", "admin"], default: "user" },
-    zip_code: { type: string, required: true},
-    username: { type: string, required: true, unique: true},
+    //city: { type: String, required: true},
+    username: { type: String, required: true, unique: true},
+    //category: { type: String, trim: true},
+    //rating: { type: Decimal128 },
+    //is_verified: { Boolean: false }, no camel case
+    current_jobs: [{ //new
+      url: { type: String, required: true },
+      filename: String,
+    }]
 }, { timestamps: true });
-
-/*Example usage of resume field: (holds a URL)
-// When saving a user
-const user = new User({
-  first_name: "Alice",
-  last_name: "Smith",
-  email: "alice@example.com",
-  resume: "/uploads/resumes/alice_resume.pdf"
-  ...
-});
-await user.save();*/
 
 // Hash password before saving
 UserSchema.pre('save', async function(next) {
