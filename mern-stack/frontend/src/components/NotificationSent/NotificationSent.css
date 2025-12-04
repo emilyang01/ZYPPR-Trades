@@ -1,0 +1,47 @@
+.notification-sent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f0f0f0;
+  width: 100vw;
+  height: 100vh;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+.notification-card {
+  background-color: #e0e0e0;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  max-width: 400px;
+  width: 100%;
+}
+
+.notification-message {
+  font-family: "Open Sans", sans-serif;
+  font-size: 1.25rem;
+  color: #000;
+  margin-bottom: 1.5rem;
+}
+
+.notification-button {
+  background-color: #ff7525;
+  color: #fff;
+  font-family: "Open Sans", sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 6px;
+  padding: 0.75rem 1.5rem;
+  cursor: pointer;
+  width: 100%;
+  transition: background-color 0.3s ease;
+}
+
+.notification-button:hover,
+.notification-button:focus {
+  background-color: #e0661f;
+  outline: none;
+}
