@@ -1,14 +1,12 @@
 import mongoose from "mongoose";
-import bcrypt from "bcryptjs"; // bcryptjs works well on Windows & Node
+import bcrypt from "bcrypt";
 
-// Define the shape of a user document in MongoDB
 const UserSchema = new mongoose.Schema(
   {
-    //
-    // --- BASIC AUTH FIELDS (SIGNUP / LOGIN) ---
-    //
+    id: { type: String },
+    first_name: { type: String, required: true, trim: true },
+    last_name: { type: String, required: true, trim: true },
 
-    // Required: email is used to log in
     email: {
       type: String,
       required: true,
@@ -17,87 +15,32 @@ const UserSchema = new mongoose.Schema(
       trim: true,
     },
 
-    // Required: plain password comes from the client
-    // We hash it before saving (see pre-save hook below)
+    // NOTE: use "password" so it matches auth.js
     password: {
       type: String,
       required: true,
       minlength: 8,
-      select: false, // do not return this field by default on queries
+      select: false, // hide by default, login will use .select("+password")
     },
 
-    // Optional display name (like "John Smith" or "Pizza King")
-    name: {
-      type: String,
-      trim: true,
-    },
+    role: { type: String, enum: ["user", "admin"], default: "user" },
 
-    // Role is used for permissions (user vs admin)
-    role: {
-      type: String,
-      enum: ["user", "admin"],
-      default: "user",
-    },
-
-    //
-    // --- OPTIONAL PROFILE FIELDS (CAN BE FILLED LATER) ---
-    //
-
-    // More detailed name fields; completely optional
-    first_name: { type: String, trim: true },
-    last_name: { type: String, trim: true },
-
-    // Username for profile / handle. Optional, but must be unique if set.
-    username: {
-      type: String,
-      trim: true,
-      unique: true,
-      sparse: true, // allows many users with no username at all
-    },
-
-    // Zip / postal code for location-based features; optional
-    zip_code: {
-      type: String,
-      trim: true,
-    },
+    // If you don't send city yet on register, make this NOT required for now
+    city: { type: String, required: false },
   },
-  { timestamps: true } // automatically adds createdAt + updatedAt
+  { timestamps: true }
 );
 
-//
-// --- PASSWORD HASHING LOGIC ---
-//
-// This runs automatically BEFORE a user is saved.
-// If the password field was modified, we hash it.
-//
-
+// Hash password before saving
 UserSchema.pre("save", async function (next) {
-  // If password wasn’t changed, don’t re-hash it
   if (!this.isModified("password")) return next();
-
-  // Generate salt and hash the password
-  const salt = await bcrypt.genSalt(12);
-  this.password = await bcrypt.hash(this.password, salt);
-
+  this.password = await bcrypt.hash(this.password, 10);
   next();
 });
 
-//
-// --- PASSWORD CHECK METHOD ---
-//
-// This is called in your /login route:
-//    const ok = await user.matchPassword(passwordFromLogin);
-//
-
-UserSchema.methods.matchPassword = function (candidatePassword) {
-  // Compare plain text password with hashed password in DB
-  return bcrypt.compare(candidatePassword, this.password);
+// Compare passwords
+UserSchema.methods.matchPassword = function (candidate) {
+  return bcrypt.compare(candidate, this.password);
 };
 
-//
-// --- EXPORT MODEL ---
-//
-// "User" is the model name; Mongo will store these in the "users" collection.
-//
-
-export default mongoose.model("User", UserSchema);
+export default mongoose.model("user", UserSchema);

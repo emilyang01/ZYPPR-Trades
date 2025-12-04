@@ -5,6 +5,8 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-d
 import { Login } from "./components/Login/Login.jsx";
 import { Signup } from "./components/Signup/Signup.jsx";
 
+import ChatBot from "./components/ChatBot";   // 👈 keep this
+
 function App() {
   return (
     <Router>
@@ -30,6 +32,9 @@ function App() {
           }
         />
       </Routes>
+
+      {/* 👇 Add ChatBot at the bottom so it appears on all pages */}
+      <ChatBot />
     </Router>
   );
 }

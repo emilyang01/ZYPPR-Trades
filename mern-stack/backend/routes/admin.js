@@ -1,4 +1,4 @@
-// backend/routes/admin.js
+// routes/admin.js
 import express from "express";
 import { requireAuth, requireRole } from "../middleware/auth.js";
 import { adminSearchUsers } from "../services/searchService.js";
@@ -20,12 +20,8 @@ router.get("/stats", (_req, res) => {
  * Admin user search:
  * GET /api/admin/search/users
  *
- * Example query:
+ * Example:
  *   /api/admin/search/users?q=ansar&role=user&page=1&limit=20
- *
- * NOTE FOR DB PERSON:
- *   This just forwards filters to adminSearchUsers in searchService.js
- *   That function should be implemented with real MongoDB queries later.
  */
 router.get("/search/users", async (req, res) => {
   try {

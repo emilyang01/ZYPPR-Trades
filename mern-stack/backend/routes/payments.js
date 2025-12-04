@@ -1,3 +1,4 @@
+// routes/payments.js
 import express from "express";
 import { requireAuth } from "../middleware/auth.js";
 import Payment from "../models/Payment.js";
@@ -19,14 +20,12 @@ router.post("/create-order", requireAuth, async (req, res) => {
       return res.status(400).json({ message: "Amount must be > 0" });
     }
 
-    // Create PayPal order
     const paypalOrder = await createPayPalOrder({
       value: amount,
       currency,
       description: jobId ? `Payment for job ${jobId}` : "ZYPPR Trades Payment",
     });
 
-    // Store in DB
     const payment = await Payment.create({
       userId: req.user.id,
       jobId,
@@ -39,7 +38,7 @@ router.post("/create-order", requireAuth, async (req, res) => {
 
     res.json({ paypalOrder, payment });
   } catch (err) {
-    console.error(err);
+    console.error("Create-order error:", err);
     res.status(500).json({ message: "Error creating payment" });
   }
 });
@@ -60,7 +59,7 @@ router.post("/capture", requireAuth, async (req, res) => {
 
     res.json(capture);
   } catch (err) {
-    console.error(err);
+    console.error("Capture error:", err);
     res.status(500).json({ message: "Capture failed" });
   }
 });
