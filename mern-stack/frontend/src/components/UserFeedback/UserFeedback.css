@@ -1,0 +1,377 @@
+/* Main Container */
+.user-feedback {
+  background-color: #f8f8f8;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: var(--ZYPPR-default-font-family, "Open Sans", sans-serif);
+}
+
+/* Header */
+.feedback-header {
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-content {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 20px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+}
+
+/* Logo Section */
+.logo-section {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+}
+
+.logo-icon {
+  width: 35px;
+  height: 41px;
+  position: relative;
+  z-index: 2;
+}
+
+.logo-image {
+  width: 55px;
+  height: 61px;
+  position: absolute;
+  left: 30px;
+  z-index: 1;
+}
+
+.logo-text {
+  font-size: 28px;
+  font-weight: 700;
+  color: #2b7de9;
+  margin: 0;
+  margin-left: 30px;
+  letter-spacing: -0.5px;
+}
+
+/* Navigation */
+.main-navigation {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  flex: 1;
+  justify-content: center;
+}
+
+.nav-link {
+  background: none;
+  border: none;
+  color: #333;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 8px 12px;
+  transition: color 0.2s ease;
+}
+
+.nav-link:hover {
+  color: #2b7de9;
+}
+
+/* Header Auth */
+.header-auth {
+  display: flex;
+  align-items: center;
+}
+
+.user-button {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  color: #333;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+/* Main Content Container */
+.feedback-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 48px 48px;
+  width: 100%;
+}
+
+/* Search Section */
+.search-section {
+  margin-bottom: 40px;
+}
+
+.search-wrapper {
+  position: relative;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.search-input {
+  width: 100%;
+  padding: 14px 48px 14px 20px;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  font-size: 15px;
+  color: #333;
+  background-color: #ffffff;
+  transition: all 0.2s ease;
+  font-family: var(--single-line-body-base-font-family);
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #2b7de9;
+  box-shadow: 0 0 0 3px rgba(43, 125, 233, 0.1);
+}
+
+.search-input::placeholder {
+  color: #999;
+}
+
+.search-icon {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+/* Reports Section */
+.reports-section {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Report Card */
+.report-card {
+  background-color: #ffffff;
+  border: 1px solid #e8e8e8;
+  border-radius: 16px;
+  padding: 24px;
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.report-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+  border-color: #d0d0d0;
+}
+
+/* Report Image */
+.report-image {
+  width: 160px;
+  height: 160px;
+  border-radius: 12px;
+  background-size: cover;
+  background-position: center;
+  flex-shrink: 0;
+}
+
+.user-image-1 {
+  background-image: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop');
+}
+
+.user-image-2 {
+  background-image: url('https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop');
+}
+
+.user-image-3 {
+  background-image: url('https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop');
+}
+
+.review-image {
+  background-image: url('https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400&h=400&fit=crop');
+}
+
+/* Report Content */
+.report-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-width: 0;
+}
+
+.report-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.report-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0;
+  font-family: var(--font-style-inter-title-font-family);
+}
+
+.report-description {
+  font-size: 14px;
+  color: #666;
+  margin: 0;
+  line-height: 1.5;
+  font-family: var(--14-regular-font-family);
+}
+
+.report-by {
+  font-size: 13px;
+  color: #999;
+  margin: 0;
+  font-style: italic;
+}
+
+/* Report Actions */
+.report-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.action-btn {
+  padding: 10px 20px;
+  background-color: #f5f5f5;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: var(--ZYPPR-default-font-family);
+  white-space: nowrap;
+}
+
+.action-btn:hover {
+  background-color: #2b7de9;
+  color: #ffffff;
+  border-color: #2b7de9;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(43, 125, 233, 0.25);
+}
+
+.action-btn:active {
+  transform: translateY(0);
+}
+
+/* Specific Action Button Styles */
+.action-btn:last-child {
+  background-color: #ffe5e5;
+  border-color: #ffcccc;
+  color: #cc0000;
+}
+
+.action-btn:last-child:hover {
+  background-color: #cc0000;
+  border-color: #cc0000;
+  color: #ffffff;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .feedback-container {
+    padding: 40px 32px;
+  }
+
+  .header-content {
+    padding: 16px 32px;
+  }
+
+  .main-navigation {
+    gap: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .report-card {
+    flex-direction: column;
+  }
+
+  .report-image {
+    width: 100%;
+    height: 200px;
+  }
+
+  .header-content {
+    flex-wrap: wrap;
+    padding: 16px 24px;
+  }
+
+  .main-navigation {
+    order: 3;
+    width: 100%;
+    justify-content: flex-start;
+    gap: 16px;
+    padding-top: 12px;
+    border-top: 1px solid #f0f0f0;
+  }
+
+  .logo-section {
+    order: 1;
+  }
+
+  .header-auth {
+    order: 2;
+  }
+
+  .feedback-container {
+    padding: 32px 24px;
+  }
+
+  .report-actions {
+    flex-direction: column;
+  }
+
+  .action-btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .nav-link {
+    font-size: 14px;
+    padding: 6px 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo-text {
+    font-size: 24px;
+  }
+
+  .report-title {
+    font-size: 18px;
+  }
+
+  .report-description {
+    font-size: 13px;
+  }
+
+  .search-input {
+    font-size: 14px;
+    padding: 12px 40px 12px 16px;
+  }
+}
