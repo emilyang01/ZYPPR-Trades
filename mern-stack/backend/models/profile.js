@@ -3,6 +3,8 @@ import mongoose from "mongoose";
     // profile references user
 const ProfileSchema = new mongoose.Schema({
     user: { type: mongoose.Schema.Types.ObjectId, ref: "user", required: true },
+    availability: {type:string, trim:true}, //day of the week
+    languages: [{ type:String }],
     profilePicture: { url: { type: String, required: true } },        // <-- stores path or URL
     bio: { type: String, required: false, trim: true},
     is_verified: { Boolean: false }, //note: no camel case

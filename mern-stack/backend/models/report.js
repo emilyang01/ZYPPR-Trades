@@ -60,10 +60,5 @@ const ReportSchema = new mongoose.Schema({
     ref: "user" // will be an admin
   },
 
-  adminNotes: {
-    type: String,
-    trim: true
-  },
-
   // Auto timestamps
 }, { timestamps: true });
