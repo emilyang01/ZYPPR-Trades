@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import IMG12581 from "./IMG-1258-1.png";
 import clipPathGroup from "./clip-path-group.png";
 import image from "./image.svg";
@@ -6,58 +6,75 @@ import star from "./star.svg";
 import "./styleguide.css";
 import "./Reviews.css";
 
-const reviewsData = [
-  {
-    rating: [star, star, star, image, image],
-    title: "Expected better...",
-    text: "Arrived late",
-    name: "Martin",
-    date: "10/19",
-  },
-  {
-    rating: [star, star, star, star, star],
-    title: "Perfect!!",
-    text: "",
-    name: "Lou boudin",
-    date: "10/18",
-  },
-  {
-    rating: [star, star, star, star, image],
-    title: "Good",
-    text: "Very friendly",
-    name: "Elena Mercioiu",
-    date: "10/17",
-  },
-];
+// Convert numeric rating (1–5) into an array of star / empty icons
+const buildRatingIcons = (ratingNumber) => {
+  const full = Math.max(0, Math.min(5, Number(ratingNumber) || 0));
+  const icons = [];
 
-const ReviewCard = ({ rating, title, text, name, date }) => (
-  <article className="review-card">
-    <div
-      className="rating"
-      role="img"
-      aria-label={`Rating: ${rating.filter((r) => r === star).length} out of 5 stars`}
-    >
-      {rating.map((src, index) => (
-        <img key={index} className="star-icon" alt="" src={src} />
-      ))}
-    </div>
-    <div className="review-content">
-      <h3 className="review-title">{title}</h3>
-      {text && <p className="review-text">{text}</p>}
-    </div>
-    <footer className="review-footer">
-      <div className="avatar" role="img" aria-label={`${name}'s avatar`} />
-      <div className="reviewer-info">
-        <span className="reviewer-name">{name}</span>
-        <time className="review-date" dateTime={`2023-${date.replace("/", "-")}`}>
-          {date}
-        </time>
+  for (let i = 0; i < 5; i++) {
+    icons.push(i < full ? star : image);
+  }
+  return icons;
+};
+
+const ReviewCard = ({ rating, title, text, name, date }) => {
+  const ratingIcons = buildRatingIcons(rating);
+
+  return (
+    <article className="review-card">
+      <div
+        className="rating"
+        role="img"
+        aria-label={`Rating: ${ratingIcons.filter((r) => r === star).length} out of 5 stars`}
+      >
+        {ratingIcons.map((src, index) => (
+          <img key={index} className="star-icon" alt="" src={src} />
+        ))}
       </div>
-    </footer>
-  </article>
-);
+      <div className="review-content">
+        <h3 className="review-title">{title}</h3>
+        {text && <p className="review-text">{text}</p>}
+      </div>
+      <footer className="review-footer">
+        <div className="avatar" role="img" aria-label={`${name}'s avatar`} />
+        <div className="reviewer-info">
+          <span className="reviewer-name">{name}</span>
+          <time className="review-date">{date}</time>
+        </div>
+      </footer>
+    </article>
+  );
+};
 
 export const Reviews = () => {
+  const [reviews, setReviews] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    const fetchReviews = async () => {
+      try {
+        setLoading(true);
+        setError("");
+
+        const res = await fetch("http://localhost:5000/api/reviews");
+        if (!res.ok) {
+          throw new Error(`Failed to load reviews (status ${res.status})`);
+        }
+
+        const data = await res.json();
+        setReviews(data);
+      } catch (err) {
+        console.error("Error fetching reviews:", err);
+        setError("Could not load reviews. Please try again later.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchReviews();
+  }, []);
+
   return (
     <main className="reviews">
       <header className="reviews-header">
@@ -90,17 +107,27 @@ export const Reviews = () => {
           Latest reviews
         </h2>
 
-        <div className="reviews-grid">
-          {reviewsData.map((review, index) => (
-            <ReviewCard key={index} {...review} />
-          ))}
-        </div>
+        {loading && <p>Loading reviews...</p>}
+        {error && <p style={{ color: "red" }}>{error}</p>}
 
-        <div className="reviews-grid">
-          {reviewsData.map((review, index) => (
-            <ReviewCard key={`row2-${index}`} {...review} />
-          ))}
-        </div>
+        {!loading && !error && (
+          <div className="reviews-grid">
+            {reviews.length === 0 ? (
+              <p>No reviews yet.</p>
+            ) : (
+              reviews.map((review) => (
+                <ReviewCard
+                  key={review._id}
+                  rating={review.rating}
+                  title={review.title}
+                  text={review.text}
+                  name={review.name}
+                  date={review.date}
+                />
+              ))
+            )}
+          </div>
+        )}
       </section>
     </main>
   );
