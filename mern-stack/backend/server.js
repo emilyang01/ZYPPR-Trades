@@ -11,6 +11,10 @@ import meRoutes from "./routes/me.js";
 import jobRoutes from "./routes/jobs.js";
 import paymentRoutes from "./routes/payments.js";
 import botRoutes from "./routes/bot.js"; // 👈 chatbot
+import userRoutes from "./routes/users.js";
+
+import messageRoutes from "./routes/message.js";
+import notificationRoutes from "./routes/notification.js";
 
 dotenv.config({ path: ".env", override: true });
 
@@ -35,6 +39,10 @@ app.use("/api/me", meRoutes);
 app.use("/api/jobs", jobRoutes);
 app.use("/api/payments", paymentRoutes);
 app.use("/api/bot", botRoutes); // 👈 only once
+app.use("/api/users", userRoutes);
+
+app.use("/api/messages", messageRoutes);
+app.use("/api/notifications", notificationRoutes);
 
 const PORT = process.env.PORT || 5000;
 

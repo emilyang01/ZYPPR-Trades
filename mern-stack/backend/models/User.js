@@ -4,6 +4,7 @@ import bcrypt from "bcrypt";
 const UserSchema = new mongoose.Schema(
   {
     id: { type: String },
+
     first_name: { type: String, required: true, trim: true },
     last_name: { type: String, required: true, trim: true },
 
@@ -15,18 +16,33 @@ const UserSchema = new mongoose.Schema(
       trim: true,
     },
 
-    // NOTE: use "password" so it matches auth.js
     password: {
       type: String,
       required: true,
       minlength: 8,
-      select: false, // hide by default, login will use .select("+password")
+      select: false,
     },
 
     role: { type: String, enum: ["user", "admin"], default: "user" },
 
-    // If you don't send city yet on register, make this NOT required for now
-    city: { type: String, required: false },
+    city: { type: String },
+
+    // === OPTIONAL FIELDS (add later if you want) ===
+    // phone: String,
+    // bio: String,
+    // avatarUrl: String,
+    // skills: [String],
+    // languages: [String],
+    // availability: {
+    //   monday: Boolean,
+    //   tuesday: Boolean,
+    //   wednesday: Boolean,
+    //   thursday: Boolean,
+    //   friday: Boolean,
+    //   saturday: Boolean,
+    //   sunday: Boolean,
+    // },
+
   },
   { timestamps: true }
 );
@@ -38,9 +54,10 @@ UserSchema.pre("save", async function (next) {
   next();
 });
 
-// Compare passwords
+// Compare password
 UserSchema.methods.matchPassword = function (candidate) {
   return bcrypt.compare(candidate, this.password);
 };
 
+// IMPORTANT: you chose to make everything lowercase "user"
 export default mongoose.model("user", UserSchema);
