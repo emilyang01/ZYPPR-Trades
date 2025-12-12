@@ -1,11 +1,11 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import IMG12581 from "./IMG-1258-1.png";
 import arrowFall from "./arrow-fall.svg";
 import arrowRise from "./arrow-rise.svg";
 import arrowlinerightS from "./arrowlineright-s.svg";
 import broadcast from "./broadcast.svg";
 import chatsTeardrop from "./chats-teardrop.svg";
-import clipPathGroup from "./clip-path-group.png";
 import cloudX from "./cloud-x.svg";
 import dot from "./dot.svg";
 import lineA from "./line-a.svg";
@@ -15,23 +15,23 @@ import "./styleguide.css";
 import "./AdminDashboard.css";
 
 export const AdminDashboard = () => {
+  const navigate = useNavigate();
   return (
     <main className="admin-dashboard">
-      <img
-        className="clip-path-group"
-        alt="Clip path group"
-        src={clipPathGroup}
-      />
-
       {/* Header */}
       <header className="header">
+        <button className="back-button" aria-label="Go back" onClick={() => window.history.back()}>
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        </button>
         <div className="header-logo">
-          <img className="logo-img" alt="Logo" src={IMG12581} />
+          <img className="logo-image" alt="ZYPPR logo" src={IMG12581} />
           <h1 className="logo-text">YPPR Trades</h1>
         </div>
 
         <nav className="navigation" aria-label="Main navigation">
-          <button className="nav-button">Jobs</button>
+          <button className="nav-button" onClick={() => navigate("/jobs")}>Jobs</button>
           <button className="nav-button">About ZYPPR</button>
           <button className="nav-button">Customer Service</button>
         </nav>
@@ -55,13 +55,13 @@ export const AdminDashboard = () => {
         </div>
 
         <div className="sidebar-menu">
-          <button className="sidebar-item">
+          <button className="sidebar-item" onClick={() => navigate("/users")}>
             <img className="sidebar-arrow" alt="Arrow" src={arrowlinerightS} />
             <img className="sidebar-icon" alt="Search" src={magnifyingGlass} />
             <span>Search User Accounts</span>
           </button>
 
-          <button className="sidebar-item">
+          <button className="sidebar-item" onClick={() => navigate("/admin/feedback")}>
             <img className="sidebar-arrow" alt="Arrow" src={arrowlinerightS} />
             <img className="sidebar-icon" alt="Chats" src={chatsTeardrop} />
             <span>View User Feedback</span>

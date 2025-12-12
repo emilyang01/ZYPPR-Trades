@@ -1,10 +1,10 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import IMG12581 from "./IMG-1258-1.png";
-import clipPathGroup from "./clip-path-group.png";
 import "./styleguide.css";
 import "./UserFeedback.css";
 
-const ReportCard = ({ imageClass, title, description, actions, reporter }) => (
+const ReportCard = ({ imageClass, title, description, actions, reporter, onActionClick }) => (
   <article className="report-card">
     <div className={`report-image ${imageClass}`} />
     <div className="report-content">
@@ -15,7 +15,7 @@ const ReportCard = ({ imageClass, title, description, actions, reporter }) => (
       </div>
       <div className="report-actions">
         {actions.map((action, index) => (
-          <button key={index} className="action-btn">
+          <button key={index} className="action-btn" onClick={() => onActionClick(action, title)}>
             {action}
           </button>
         ))}
@@ -25,18 +25,24 @@ const ReportCard = ({ imageClass, title, description, actions, reporter }) => (
 );
 
 export const UserFeedback = () => {
+  const navigate = useNavigate();
+
   return (
     <main className="user-feedback">
       <header className="feedback-header">
         <div className="header-content">
+          <button className="back-button" aria-label="Go back" onClick={() => navigate(-1)}>
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </button>
           <div className="logo-section">
-            <img className="logo-icon" alt="ZYPPR logo" src={clipPathGroup} />
-            <img className="logo-image" alt="" src={IMG12581} />
+            <img className="logo-image" alt="ZYPPR logo" src={IMG12581} />
             <h1 className="logo-text">YPPR Trades</h1>
           </div>
 
           <nav className="main-navigation" aria-label="Main navigation">
-            <button className="nav-link">Jobs</button>
+            <button className="nav-link" onClick={() => navigate("/jobs")}>Jobs</button>
             <button className="nav-link">About ZYPPR</button>
             <button className="nav-link">Customer Service</button>
           </nav>
@@ -73,6 +79,11 @@ export const UserFeedback = () => {
             description="Reported for misleading job posting."
             reporter="Andi Lane"
             actions={["See profile", "Send Warning Message", "Ban User"]}
+            onActionClick={(action) => {
+              if (action === "See profile") navigate("/users/1");
+              else if (action === "Send Warning Message") navigate("/admin/warning/1");
+              else console.log(action);
+            }}
           />
 
           <ReportCard
@@ -81,6 +92,11 @@ export const UserFeedback = () => {
             description="Reported for inappropriate language."
             reporter="Andi Lane"
             actions={["See profile", "Send Warning Message", "Ban User"]}
+            onActionClick={(action) => {
+              if (action === "See profile") navigate("/users/2");
+              else if (action === "Send Warning Message") navigate("/admin/warning/2");
+              else console.log(action);
+            }}
           />
 
           <ReportCard
@@ -89,6 +105,11 @@ export const UserFeedback = () => {
             description="Reported for spam messages or job postings."
             reporter="Andi Lane"
             actions={["See profile", "Send Warning Message", "Ban User"]}
+            onActionClick={(action) => {
+              if (action === "See profile") navigate("/users/1");
+              else if (action === "Send Warning Message") navigate("/admin/warning/1");
+              else console.log(action);
+            }}
           />
 
           <ReportCard
@@ -97,6 +118,10 @@ export const UserFeedback = () => {
             description="Reported for inaccurate or misleading review."
             reporter="Andi Lane"
             actions={["See Review", "Send Warning Message", "Delete Review"]}
+            onActionClick={(action) => {
+              if (action === "See Review") navigate("/reviews");
+              else console.log(action);
+            }}
           />
         </section>
       </div>
