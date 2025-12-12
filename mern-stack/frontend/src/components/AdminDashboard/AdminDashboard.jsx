@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import IMG12581 from "./IMG-1258-1.png";
 import arrowFall from "./arrow-fall.svg";
@@ -16,6 +16,65 @@ import "./AdminDashboard.css";
 
 export const AdminDashboard = () => {
   const navigate = useNavigate();
+  const [searchTab, setSearchTab] = useState("users"); // "users" | "jobs" | "reports"
+  const [query, setQuery] = useState("");
+  const [results, setResults] = useState([]); // user list for now
+  const [loading, setLoading] = useState(false);
+  const [searchError, setSearchError] = useState("");
+
+  const runAdminUserSearch = async (q) => {
+    const token = localStorage.getItem("authToken");
+    if (!token) {
+      setSearchError("Missing token. Please login again.");
+      return;
+    }
+
+    setLoading(true);
+    setSearchError("");
+
+    try {
+      const url = `http://localhost:5000/api/admin/search/users?q=${encodeURIComponent(q)}&page=1&limit=20`;
+
+      const res = await fetch(url, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setSearchError(data.message || "Search failed");
+        setResults([]);
+        return;
+      }
+
+      // IMPORTANT: your backend likely returns an object, not a raw array.
+      // Try these common shapes:
+      const users = Array.isArray(data) ? data : (data.users || data.results || []);
+      setResults(data.data);
+
+    } catch (err) {
+      setSearchError("Server error while searching");
+      setResults([]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Debounced search: only for Users tab right now
+  useEffect(() => {
+    if (searchTab !== "users") return;
+
+    const trimmed = query.trim();
+    const t = setTimeout(() => {
+      if (trimmed.length >= 2) runAdminUserSearch(trimmed);
+      if (trimmed.length === 0) setResults([]);
+    }, 300);
+
+    return () => clearTimeout(t);
+  }, [query, searchTab]);
+
   return (
     <main className="admin-dashboard">
       {/* Header */}
@@ -132,6 +191,62 @@ export const AdminDashboard = () => {
 
       {/* Main Content */}
       <div className="main-content">
+
+                {/* Search Bar */}
+        <div style={{ display: "flex", gap: 12, alignItems: "center", marginBottom: 20 }}>
+          <button
+            onClick={() => setSearchTab("users")}
+            style={{ padding: "10px 14px", borderRadius: 8, border: "1px solid #ddd", background: searchTab === "users" ? "#eee" : "#fff" }}
+          >
+            Search Users
+          </button>
+
+          <button
+            onClick={() => setSearchTab("jobs")}
+            style={{ padding: "10px 14px", borderRadius: 8, border: "1px solid #ddd", background: searchTab === "jobs" ? "#eee" : "#fff" }}
+          >
+            Search Jobs
+          </button>
+
+          <button
+            onClick={() => setSearchTab("reports")}
+            style={{ padding: "10px 14px", borderRadius: 8, border: "1px solid #ddd", background: searchTab === "reports" ? "#eee" : "#fff" }}
+          >
+            Search Reports
+          </button>
+
+          <div style={{ flex: 1, display: "flex", alignItems: "center", gap: 10, border: "1px solid #ddd", borderRadius: 10, padding: "10px 12px" }}>
+            <img alt="Search" src={magnifyingGlass} style={{ width: 18, height: 18 }} />
+            <input
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder={searchTab === "users" ? "Search users by name/email..." : "Search..."}
+              style={{ border: "none", outline: "none", width: "100%" }}
+            />
+          </div>
+        </div>
+
+        {searchTab === "users" && (
+          <>
+            {loading && <div>Searching...</div>}
+            {searchError && <div style={{ color: "red" }}>{searchError}</div>}
+
+            {/* Results */}
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(3, minmax(0, 1fr))", gap: 18, marginBottom: 24 }}>
+              {results.map((u) => (
+                <div key={u._id} style={{ border: "1px solid #ddd", borderRadius: 12, padding: 16 }}>
+                  <div style={{ fontWeight: 700 }}>
+                    {(u.first_name || "") + " " + (u.last_name || "")}
+                  </div>
+                  <div style={{ opacity: 0.8 }}>{u.email}</div>
+                  <div style={{ opacity: 0.8 }}>{u.city}</div>
+                  <div style={{ opacity: 0.8 }}>Role: {u.role}</div>
+                </div>
+              ))}
+            </div>
+          </>
+        )}
+
         {/* Overview Header */}
         <div className="content-header">
           <h2 className="page-title">Overview</h2>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import IMG12581 from "./IMG_1258 1.png";
 import search from "./Search.svg";
@@ -20,6 +20,8 @@ export const JobSearch = () => {
     hourlyRate: { min: 25, max: 100 }
   });
   const [keywords, setKeywords] = useState(["Painter", "Rating", "Woman"]);
+  const [jobs, setJobs] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const toggleFilter = (category, key) => {
     if (typeof filters[category] === 'object' && filters[category] !== null) {
@@ -42,6 +44,64 @@ export const JobSearch = () => {
       hourlyRate: { ...prev.hourlyRate, [type]: value }
     }));
   };
+
+    const fetchJobs = async () => {
+    setLoading(true);
+    try {
+      const params = new URLSearchParams();
+
+      // search text -> q
+      if (searchTerm.trim()) params.set("q", searchTerm.trim());
+
+      // hourly rate -> minRate/maxRate
+      if (filters.hourlyRate?.min) params.set("minRate", String(filters.hourlyRate.min));
+      if (filters.hourlyRate?.max) params.set("maxRate", String(filters.hourlyRate.max));
+
+      // locations -> city (pick the first checked)
+      const selectedCity =
+        (filters.locations.sacramento && "Sacramento") ||
+        (filters.locations.elkGrove && "Elk Grove") ||
+        (filters.locations.roseville && "Roseville") ||
+        "";
+      if (selectedCity) params.set("city", selectedCity);
+
+      const url = `http://localhost:5000/api/jobs?${params.toString()}`;
+
+      const res = await fetch(url);
+      const data = await res.json();
+
+      if (!res.ok) {
+        console.error("Jobs fetch failed:", data);
+        setJobs([]);
+        return;
+      }
+
+      setJobs(Array.isArray(data) ? data : []);
+    } catch (err) {
+      console.error("Jobs fetch error:", err);
+      setJobs([]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Debounce typing + refetch when filters change
+  useEffect(() => {
+    const t = setTimeout(() => {
+      fetchJobs();
+    }, 300);
+
+    return () => clearTimeout(t);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [
+    searchTerm,
+    filters.hourlyRate.min,
+    filters.hourlyRate.max,
+    filters.locations.sacramento,
+    filters.locations.elkGrove,
+    filters.locations.roseville,
+  ]);
+
   return (
     <div className="job-search">
       <div className="job-search-container">
@@ -267,96 +327,41 @@ export const JobSearch = () => {
               </div>
             </div>
 
-            {/* Product Grid */}
+             {/* Product Grid */}
             <div className="job-search-product-grid">
               <div className="job-search-cards-grid">
-                <div className="job-search-job-card" onClick={() => navigate("/jobs/1")} style={{ cursor: 'pointer' }}>
-                  <div className="job-search-card-body">
-                    <div className="job-search-card-heading">
-                      Commission mural painting
-                    </div>
-                    <div className="job-search-card-info-row">
-                      <div className="job-search-card-avatar"></div>
-                      <div className="job-search-card-role">Painter</div>
-                    </div>
-                    <div className="job-search-card-footer">
-                      Service offered
-                    </div>
-                  </div>
-                </div>
+                {loading && <div style={{ padding: 12 }}>Loading jobs...</div>}
 
-                <div className="job-search-job-card" onClick={() => navigate("/jobs/2")} style={{ cursor: 'pointer' }}>
-                  <div className="job-search-card-body">
-                    <div className="job-search-card-heading">
-                      Tutor Needed!
-                    </div>
-                    <div className="job-search-card-info-row">
-                      <div className="job-search-card-avatar"></div>
-                      <div className="job-search-card-role">Tutor</div>
-                    </div>
-                    <div className="job-search-card-footer">
-                      Service requested
-                    </div>
-                  </div>
-                </div>
+                {!loading && jobs.length === 0 && (
+                  <div style={{ padding: 12 }}>No jobs found.</div>
+                )}
 
-                <div className="job-search-job-card" onClick={() => navigate("/jobs/3")} style={{ cursor: 'pointer' }}>
-                  <div className="job-search-card-body">
-                    <div className="job-search-card-heading">
-                      Electrician needed
-                    </div>
-                    <div className="job-search-card-info-row">
-                      <div className="job-search-card-avatar"></div>
-                      <div className="job-search-card-role">Electrician</div>
-                    </div>
-                    <div className="job-search-card-footer">
-                      Service requested
-                    </div>
-                  </div>
-                </div>
+                {jobs.map((job) => (
+                  <div
+                    key={job._id}
+                    className="job-search-job-card"
+                    onClick={() => navigate(`/jobs/${job._id}`)}
+                    style={{ cursor: "pointer" }}
+                  >
+                    <div className="job-search-card-body">
+                      <div className="job-search-card-heading">
+                        {job.title}
+                      </div>
 
-                <div className="job-search-job-card" onClick={() => navigate("/jobs/4")} style={{ cursor: 'pointer' }}>
-                  <div className="job-search-card-body">
-                    <div className="job-search-card-heading">Gardener</div>
-                    <div className="job-search-card-info-row">
-                      <div className="job-search-card-avatar"></div>
-                      <div className="job-search-card-role">Gardener</div>
-                    </div>
-                    <div className="job-search-card-footer">
-                      Service offered
-                    </div>
-                  </div>
-                </div>
+                      <div className="job-search-card-info-row">
+                        <div className="job-search-card-avatar"></div>
+                        <div className="job-search-card-role">
+                          {job.category}
+                        </div>
+                      </div>
 
-                <div className="job-search-job-card" onClick={() => navigate("/jobs/5")} style={{ cursor: 'pointer' }}>
-                  <div className="job-search-card-body">
-                    <div className="job-search-card-heading">
-                      Movers (includes going upstairs)
-                    </div>
-                    <div className="job-search-card-info-row">
-                      <div className="job-search-card-avatar"></div>
-                      <div className="job-search-card-role">Mover</div>
-                    </div>
-                    <div className="job-search-card-footer">
-                      Service requested
+                      <div className="job-search-card-footer">
+                        {job.city || "Location not set"}
+                        {job.hourly_rate ? ` • $${job.hourly_rate}/hr` : ""}
+                      </div>
                     </div>
                   </div>
-                </div>
-
-                <div className="job-search-job-card" onClick={() => navigate("/jobs/6")} style={{ cursor: 'pointer' }}>
-                  <div className="job-search-card-body">
-                    <div className="job-search-card-heading">
-                      Housekeeping and co.
-                    </div>
-                    <div className="job-search-card-info-row">
-                      <div className="job-search-card-avatar"></div>
-                      <div className="job-search-card-role">Housekeeper</div>
-                    </div>
-                    <div className="job-search-card-footer">
-                      Service offered
-                    </div>
-                  </div>
-                </div>
+                ))}
               </div>
             </div>
           </div>

@@ -43,34 +43,31 @@ export const Login = () => {
 
     setIsLoading(true);
     try {
-      // TODO: REMOVE THIS MOCK LOGIN BLOCK WHEN BACKEND IS READY
-      // This is temporary for frontend-only testing without backend connection
-      // Original API call code is commented below:
-      /*
-      const res = await fetch("http://localhost:5000/api/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
-      });
-      const data = await res.json();
-      if (!res.ok) {
-        setError(data.message || "Login failed");
-        setEmailError(true);
-        setPasswordError(true);
-        return;
-      }
-      localStorage.setItem("authToken", data.token);
-      localStorage.setItem("user", JSON.stringify(data.user));
-      */
-      
-      // MOCK LOGIN: Replace with real API call above
-      const mockToken = "mock-token-" + Date.now();
-      const mockUser = { id: "user-" + Date.now(), email, role: "user", name: email.split("@")[0] };
-      localStorage.setItem("authToken", mockToken);
-      localStorage.setItem("user", JSON.stringify(mockUser));
-      
-      setSuccessMessage("Login successful! Redirecting...");
-      setTimeout(() => navigate("/dashboard"), 1000);
+    const res = await fetch("http://localhost:5000/api/auth/login", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ email, password }),
+});
+
+const data = await res.json();
+
+if (!res.ok) {
+  setError(data.message || "Login failed");
+  setEmailError(true);
+  setPasswordError(true);
+  return;
+}
+
+localStorage.setItem("authToken", data.token);
+localStorage.setItem("user", JSON.stringify(data.user));
+
+setSuccessMessage("Login successful! Redirecting...");
+
+setTimeout(() => {
+  if (data.user?.role === "admin") navigate("/admin/dashboard");
+  else navigate("/dashboard");
+}, 1000);
+
     } catch (err) {
       setError("Unable to connect to the server. Please try again.");
     } finally {

@@ -2,6 +2,31 @@
 import User from "../models/User.js";
 import Job from "../models/job.js";
 
+
+
+export const searchUsers = async (req, res) => {
+  try {
+    const { q = "" } = req.query;
+
+    const users = await User.find({
+      $or: [
+        { first_name: { $regex: q, $options: "i" } },
+        { last_name: { $regex: q, $options: "i" } },
+        { email: { $regex: q, $options: "i" } },
+        { city: { $regex: q, $options: "i" } },
+      ],
+    })
+      .select("first_name last_name email city role rating hourly_rate")
+      .limit(20)
+      .lean();
+
+    res.json(users);
+  } catch (err) {
+    console.error("User search error:", err);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
 // GET /api/users/:userId  -> basic public profile
 export const getUserProfile = async (req, res) => {
   try {
