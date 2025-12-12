@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import IMG12581 from "./IMG-1258-1.png";
 import chatCircleDots from "./chat-circle-dots.svg";
 // removed clipPathGroup image (it contained a large non-clickable arrow)
@@ -8,6 +9,8 @@ import "./styleguide.css";
 import "./ViewUserDetails.css";
 
 export const ViewUserDetails = () => {
+  const navigate = useNavigate();
+  const { userId } = useParams();
   return (
     <main className="view-user-details">
       <header className="user-header">
@@ -29,8 +32,8 @@ export const ViewUserDetails = () => {
           </nav>
 
           <div className="header-auth">
-            <button className="signin-button">Sign in</button>
-            <button className="register-button">Register</button>
+            <button className="signin-button" onClick={() => navigate("/login")}>Sign in</button>
+            <button className="register-button" onClick={() => navigate("/signup")}>Register</button>
           </div>
         </div>
       </header>
@@ -38,21 +41,21 @@ export const ViewUserDetails = () => {
       <div className="user-content">
         <aside className="left-sidebar">
           <div className="user-stats">
-            <button className="stat-item">
+            <button className="stat-item" onClick={() => console.log('View followers')}>
               <img src={userList} alt="" />
               <span>Followers (4)</span>
             </button>
-            <button className="stat-item">
+            <button className="stat-item" onClick={() => console.log('View following')}>
               <img src={userCirclePlus} alt="" />
               <span>Following (9)</span>
             </button>
-            <button className="stat-item message-btn">
+            <button className="stat-item message-btn" onClick={() => console.log('Send message')}>
               <img src={chatCircleDots} alt="" />
               <span>Message</span>
             </button>
           </div>
 
-          <button className="follow-button">Follow</button>
+          <button className="follow-button" onClick={() => console.log('Follow user')}>Follow</button>
 
           <section className="availability-section">
             <h2 className="sidebar-heading">Availability</h2>
@@ -72,11 +75,11 @@ export const ViewUserDetails = () => {
               <span>★★★★☆</span>
               <span className="rating-number">4</span>
             </div>
-            <button className="see-reviews-btn">See Reviews</button>
+            <button className="see-reviews-btn" onClick={() => navigate("/reviews")}>See Reviews</button>
           </div>
 
-          <button className="view-resume-btn">View Resume</button>
-          <button className="report-user-btn">Report User</button>
+          <button className="view-resume-btn" onClick={() => console.log('View resume')}>View Resume</button>
+          <button className="report-user-btn" onClick={() => navigate(`/report/user/${userId}`)}>Report User</button>
         </aside>
 
         <div className="main-content">

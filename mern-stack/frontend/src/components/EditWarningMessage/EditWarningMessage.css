@@ -8,14 +8,6 @@
   font-family: "Open Sans", Helvetica, sans-serif;
 }
 
-.clip-path-group {
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  width: 35px;
-  z-index: 3;
-}
-
 .message-container {
   background-color: #fdfdfd;
   border-radius: 15px;

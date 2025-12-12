@@ -1,9 +1,10 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import logo from "./logo.png";
-import clipPathGroup from "./clip-path-group.png";
 import "./style.css";
 
 export const AdminLogin = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -59,24 +60,26 @@ export const AdminLogin = () => {
       // TODO: Backend API call here
       console.log("Form submitted:", formData);
       // Example: await fetch('/api/admin/login', { method: 'POST', body: JSON.stringify(formData) })
+      // For now, navigate to admin dashboard
+      navigate("/admin/dashboard");
     }
   };
 
   const handleSignUpClick = () => {
-    // TODO: Navigation to sign up page
-    console.log("Navigate to sign up");
-    // Example: navigate('/admin/signup')
+    navigate("/admin/signup");
   };
 
   const handleForgotPassword = () => {
-    // TODO: Navigation to forgot password page
-    console.log("Navigate to forgot password");
-    // Example: navigate('/admin/forgot-password')
+    navigate("/forgot-password");
   };
 
   return (
     <div className="admin-login">
-      <img className="clip-path-group" alt="Back" src={clipPathGroup} />
+      <button className="back-button" onClick={() => window.history.back()} aria-label="Go back">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
+      </button>
       
       <div className="form-container">
         <img className="logo" alt="ZYPPR Trades" src={logo} />

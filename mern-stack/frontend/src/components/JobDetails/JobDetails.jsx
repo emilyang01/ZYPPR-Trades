@@ -1,28 +1,35 @@
 import React from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import IMG12821 from "./IMG-1282-1.png";
 import IMG12581 from "./IMG-1258-1.png";
 import chatCircleDots from "./chat-circle-dots.svg";
 import "./JobDetails.css";
 
 export const JobDetails = () => {
+  const navigate = useNavigate();
+  const { jobId } = useParams();
+
   const handleBack = () => {
-    console.log("Navigate back");
+    navigate(-1);
   };
 
   const handleNavClick = (nav) => {
-    console.log(`Navigate to ${nav}`);
+    if (nav === 'Jobs') navigate('/jobs');
+    // Add other navigation as needed
   };
 
   const handleContactClient = () => {
     console.log("Contact Martha");
+    // TODO: Implement messaging feature
   };
 
   const handleApply = () => {
     console.log("Apply to job");
+    // TODO: Implement job application
   };
 
   const handleReport = () => {
-    console.log("Report listing");
+    navigate(`/report/job/${jobId}`);
   };
 
   return (

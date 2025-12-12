@@ -43,11 +43,10 @@
   background-color: #f5f5f5;
 }
 
-/* Logo Section */
 .logo-section {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 0px;
   position: relative;
 }
 
@@ -59,19 +58,16 @@
 }
 
 .logo-image {
-  /* increased by 30px in both dimensions as requested */
-  width: 62px; /* 32 + 30 */
-  height: 68px; /* 38 + 30 */
-  position: absolute;
-  left: -45px; /* moved 15px further left (total -45px) */
-  z-index: 1;
+  width: 62px;
+  height: 68px;
 }
 
 .logo-text {
-  font-size: 24px;
+  font-size: 28px;
   font-weight: 700;
-  color: #2b7de9;
+  color: #0b6fff;
   margin: 0;
+  margin-left: -8px;
   letter-spacing: 0;
   font-family: var(--ZYPPR-default-font-family);
 }

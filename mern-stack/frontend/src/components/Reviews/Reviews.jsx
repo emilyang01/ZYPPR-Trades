@@ -1,6 +1,6 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import IMG12581 from "./IMG-1258-1.png";
-import clipPathGroup from "./clip-path-group.png";
 import image from "./image.svg";
 import star from "./star.svg";
 import "./styleguide.css";
@@ -58,27 +58,33 @@ const ReviewCard = ({ rating, title, text, name, date }) => (
 );
 
 export const Reviews = () => {
+  const navigate = useNavigate();
+
   return (
     <main className="reviews">
       <header className="reviews-header">
         <div className="header-content">
+          <button className="back-button" aria-label="Go back" onClick={() => navigate(-1)}>
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </button>
           <div className="logo-section">
-            <img className="logo-icon" alt="ZYPPR logo" src={clipPathGroup} />
-            <img className="logo-image" alt="" src={IMG12581} />
+            <img className="logo-image" alt="ZYPPR logo" src={IMG12581} />
             <h1 className="logo-text">YPPR Trades</h1>
           </div>
 
           <nav className="main-navigation" aria-label="Main navigation">
-            <button className="nav-link">Jobs</button>
+            <button className="nav-link" onClick={() => navigate("/jobs")}>Jobs</button>
             <button className="nav-link">About ZYPPR</button>
             <button className="nav-link">Customer Service</button>
           </nav>
 
           <div className="auth-buttons">
-            <button className="btn-signin" type="button">
+            <button className="btn-signin" type="button" onClick={() => navigate("/login")}>
               Sign in
             </button>
-            <button className="btn-register" type="button">
+            <button className="btn-register" type="button" onClick={() => navigate("/signup")}>
               Register
             </button>
           </div>

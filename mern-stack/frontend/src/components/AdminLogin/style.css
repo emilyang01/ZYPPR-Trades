@@ -8,6 +8,28 @@
   padding: 20px;
 }
 
+.admin-login .back-button {
+  background: none;
+  border: none;
+  color: #333;
+  cursor: pointer;
+  padding: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease;
+  border-radius: 4px;
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 100;
+}
+
+.admin-login .back-button:hover {
+  color: #0b6fff;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
 .admin-login .clip-path-group {
   height: 41px;
   width: 35px;

@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React from "react";
 import IMG12581 from "./IMG_1258 1.png";
 import search from "./Search.svg";
 import clipPathGroup from "./Clip path group.png";
@@ -9,39 +8,6 @@ import "./JobSearch.css";
 import "../SharedHeader/SharedHeader.css";
 
 export const JobSearch = () => {
-  const navigate = useNavigate();
-  const [searchTerm, setSearchTerm] = useState("");
-  const [filters, setFilters] = useState({
-    verifiedWorker: false,
-    availableToday: false,
-    topRated: false,
-    locations: { sacramento: false, elkGrove: false, roseville: false },
-    sizes: { beginner: false, intermediate: false, expert: false },
-    hourlyRate: { min: 25, max: 100 }
-  });
-  const [keywords, setKeywords] = useState(["Painter", "Rating", "Woman"]);
-
-  const toggleFilter = (category, key) => {
-    if (typeof filters[category] === 'object' && filters[category] !== null) {
-      setFilters(prev => ({
-        ...prev,
-        [category]: { ...prev[category], [key]: !prev[category][key] }
-      }));
-    } else {
-      setFilters(prev => ({ ...prev, [category]: !prev[category] }));
-    }
-  };
-
-  const removeKeyword = (keyword) => {
-    setKeywords(prev => prev.filter(k => k !== keyword));
-  };
-
-  const handleRateChange = (value, type) => {
-    setFilters(prev => ({
-      ...prev,
-      hourlyRate: { ...prev.hourlyRate, [type]: value }
-    }));
-  };
   return (
     <div className="job-search">
       <div className="job-search-container">
@@ -66,8 +32,8 @@ export const JobSearch = () => {
               </nav>
 
               <div className="shared-header-auth">
-                <button className="shared-signin-button" onClick={() => navigate("/login")}>Sign in</button>
-                <button className="shared-register-button" onClick={() => navigate("/signup")}>Register</button>
+                <button className="shared-signin-button">Sign in</button>
+                <button className="shared-register-button">Register</button>
               </div>
             </div>
           </header>
@@ -75,7 +41,7 @@ export const JobSearch = () => {
 
         {/* Search Controls */}
         <div className="job-search-controls">
-          <button className="job-search-control-button" onClick={() => navigate("/users")}>Search Users</button>
+          <button className="job-search-control-button">Search Users</button>
           <button className="job-search-control-button active">
             Search Jobs
           </button>
@@ -85,8 +51,6 @@ export const JobSearch = () => {
               className="job-search-input"
               placeholder="Search Reports"
               type="text"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
             />
             <img className="job-search-search-icon" alt="Search" src={search} />
           </div>
@@ -103,51 +67,57 @@ export const JobSearch = () => {
                 </div>
 
                 <div className="job-search-keyword-list">
-                  {keywords.map((keyword) => (
-                    <div className="job-search-tag" key={keyword}>
-                      <div className="job-search-tag-text">{keyword}</div>
-                      <img className="job-search-tag-icon" alt="X" src={x} onClick={() => removeKeyword(keyword)} style={{ cursor: 'pointer' }} />
-                    </div>
-                  ))}
+                  <div className="job-search-tag">
+                    <div className="job-search-tag-text">Painter</div>
+                    <img className="job-search-tag-icon" alt="X" src={x} />
+                  </div>
+                  <div className="job-search-tag">
+                    <div className="job-search-tag-text">Rating</div>
+                    <img className="job-search-tag-icon" alt="X" src={x} />
+                  </div>
+                  <div className="job-search-tag">
+                    <div className="job-search-tag-text">Woman</div>
+                    <img className="job-search-tag-icon" alt="X" src={x} />
+                  </div>
                 </div>
               </div>
 
               <div className="job-search-filter-section">
                 <div className="job-search-checkboxes-section">
                   <div className="job-search-checkbox-field">
-                    <div className="job-search-checkbox-wrapper" onClick={() => toggleFilter('verifiedWorker')} style={{ cursor: 'pointer' }}>
-                      <div className="job-search-checkbox" style={{ backgroundColor: filters.verifiedWorker ? '#007bff' : 'transparent' }}>
-                        {filters.verifiedWorker && <img
+                    <div className="job-search-checkbox-wrapper">
+                      <div className="job-search-checkbox">
+                        <img
                           className="job-search-check-icon"
                           alt="Check"
                           src={check}
-                        />}
+                        />
                       </div>
                       <div className="job-search-label">Verified worker</div>
                     </div>
                   </div>
 
                   <div className="job-search-checkbox-field">
-                    <div className="job-search-checkbox-wrapper" onClick={() => toggleFilter('availableToday')} style={{ cursor: 'pointer' }}>
-                      <div className="job-search-checkbox" style={{ backgroundColor: filters.availableToday ? '#007bff' : 'transparent' }}>
-                        {filters.availableToday && <img
+                    <div className="job-search-checkbox-wrapper">
+                      <div className="job-search-checkbox">
+                        <img
                           className="job-search-check-icon"
                           alt="Check"
                           src={check}
-                        />}
+                        />
                       </div>
                       <div className="job-search-label">Available today</div>
                     </div>
                   </div>
 
                   <div className="job-search-checkbox-field">
-                    <div className="job-search-checkbox-wrapper" onClick={() => toggleFilter('topRated')} style={{ cursor: 'pointer' }}>
-                      <div className="job-search-checkbox" style={{ backgroundColor: filters.topRated ? '#007bff' : 'transparent' }}>
-                        {filters.topRated && <img
+                    <div className="job-search-checkbox-wrapper">
+                      <div className="job-search-checkbox">
+                        <img
                           className="job-search-check-icon"
                           alt="Check"
                           src={check}
-                        />}
+                        />
                       </div>
                       <div className="job-search-label">Top rated</div>
                     </div>
@@ -159,7 +129,7 @@ export const JobSearch = () => {
                 <div className="job-search-slider-label">
                   <div className="job-search-label">Hourly rate</div>
                   <div className="job-search-slider-output">
-                    <div className="job-search-price">${filters.hourlyRate.min}-{filters.hourlyRate.max}</div>
+                    <div className="job-search-price">$25-100</div>
                   </div>
                 </div>
 
@@ -179,39 +149,39 @@ export const JobSearch = () => {
 
                 <div className="job-search-options-wrapper">
                   <div className="job-search-checkbox-field">
-                    <div className="job-search-checkbox-wrapper" onClick={() => toggleFilter('locations', 'sacramento')} style={{ cursor: 'pointer' }}>
-                      <div className="job-search-checkbox" style={{ backgroundColor: filters.locations.sacramento ? '#007bff' : 'transparent' }}>
-                        {filters.locations.sacramento && <img
+                    <div className="job-search-checkbox-wrapper">
+                      <div className="job-search-checkbox">
+                        <img
                           className="job-search-check-icon"
                           alt="Check"
                           src={check}
-                        />}
+                        />
                       </div>
                       <div className="job-search-label">Sacramento</div>
                     </div>
                   </div>
 
                   <div className="job-search-checkbox-field">
-                    <div className="job-search-checkbox-wrapper" onClick={() => toggleFilter('locations', 'elkGrove')} style={{ cursor: 'pointer' }}>
-                      <div className="job-search-checkbox" style={{ backgroundColor: filters.locations.elkGrove ? '#007bff' : 'transparent' }}>
-                        {filters.locations.elkGrove && <img
+                    <div className="job-search-checkbox-wrapper">
+                      <div className="job-search-checkbox">
+                        <img
                           className="job-search-check-icon"
                           alt="Check"
                           src={check}
-                        />}
+                        />
                       </div>
                       <div className="job-search-label">Elk Grove</div>
                     </div>
                   </div>
 
                   <div className="job-search-checkbox-field">
-                    <div className="job-search-checkbox-wrapper" onClick={() => toggleFilter('locations', 'roseville')} style={{ cursor: 'pointer' }}>
-                      <div className="job-search-checkbox" style={{ backgroundColor: filters.locations.roseville ? '#007bff' : 'transparent' }}>
-                        {filters.locations.roseville && <img
+                    <div className="job-search-checkbox-wrapper">
+                      <div className="job-search-checkbox">
+                        <img
                           className="job-search-check-icon"
                           alt="Check"
                           src={check}
-                        />}
+                        />
                       </div>
                       <div className="job-search-label">Roseville</div>
                     </div>
@@ -226,39 +196,39 @@ export const JobSearch = () => {
 
                 <div className="job-search-options-wrapper">
                   <div className="job-search-checkbox-field">
-                    <div className="job-search-checkbox-wrapper" onClick={() => toggleFilter('sizes', 'beginner')} style={{ cursor: 'pointer' }}>
-                      <div className="job-search-checkbox" style={{ backgroundColor: filters.sizes.beginner ? '#007bff' : 'transparent' }}>
-                        {filters.sizes.beginner && <img
+                    <div className="job-search-checkbox-wrapper">
+                      <div className="job-search-checkbox">
+                        <img
                           className="job-search-check-icon"
                           alt="Check"
                           src={check}
-                        />}
+                        />
                       </div>
                       <div className="job-search-label">Beginner</div>
                     </div>
                   </div>
 
                   <div className="job-search-checkbox-field">
-                    <div className="job-search-checkbox-wrapper" onClick={() => toggleFilter('sizes', 'intermediate')} style={{ cursor: 'pointer' }}>
-                      <div className="job-search-checkbox" style={{ backgroundColor: filters.sizes.intermediate ? '#007bff' : 'transparent' }}>
-                        {filters.sizes.intermediate && <img
+                    <div className="job-search-checkbox-wrapper">
+                      <div className="job-search-checkbox">
+                        <img
                           className="job-search-check-icon"
                           alt="Check"
                           src={check}
-                        />}
+                        />
                       </div>
                       <div className="job-search-label">Intermediate</div>
                     </div>
                   </div>
 
                   <div className="job-search-checkbox-field">
-                    <div className="job-search-checkbox-wrapper" onClick={() => toggleFilter('sizes', 'expert')} style={{ cursor: 'pointer' }}>
-                      <div className="job-search-checkbox" style={{ backgroundColor: filters.sizes.expert ? '#007bff' : 'transparent' }}>
-                        {filters.sizes.expert && <img
+                    <div className="job-search-checkbox-wrapper">
+                      <div className="job-search-checkbox">
+                        <img
                           className="job-search-check-icon"
                           alt="Check"
                           src={check}
-                        />}
+                        />
                       </div>
                       <div className="job-search-label">Expert</div>
                     </div>
@@ -270,7 +240,7 @@ export const JobSearch = () => {
             {/* Product Grid */}
             <div className="job-search-product-grid">
               <div className="job-search-cards-grid">
-                <div className="job-search-job-card" onClick={() => navigate("/jobs/1")} style={{ cursor: 'pointer' }}>
+                <div className="job-search-job-card">
                   <div className="job-search-card-body">
                     <div className="job-search-card-heading">
                       Commission mural painting
@@ -285,7 +255,7 @@ export const JobSearch = () => {
                   </div>
                 </div>
 
-                <div className="job-search-job-card" onClick={() => navigate("/jobs/2")} style={{ cursor: 'pointer' }}>
+                <div className="job-search-job-card">
                   <div className="job-search-card-body">
                     <div className="job-search-card-heading">
                       Tutor Needed!
@@ -300,7 +270,7 @@ export const JobSearch = () => {
                   </div>
                 </div>
 
-                <div className="job-search-job-card" onClick={() => navigate("/jobs/3")} style={{ cursor: 'pointer' }}>
+                <div className="job-search-job-card">
                   <div className="job-search-card-body">
                     <div className="job-search-card-heading">
                       Electrician needed
@@ -315,7 +285,7 @@ export const JobSearch = () => {
                   </div>
                 </div>
 
-                <div className="job-search-job-card" onClick={() => navigate("/jobs/4")} style={{ cursor: 'pointer' }}>
+                <div className="job-search-job-card">
                   <div className="job-search-card-body">
                     <div className="job-search-card-heading">Gardener</div>
                     <div className="job-search-card-info-row">
@@ -328,7 +298,7 @@ export const JobSearch = () => {
                   </div>
                 </div>
 
-                <div className="job-search-job-card" onClick={() => navigate("/jobs/5")} style={{ cursor: 'pointer' }}>
+                <div className="job-search-job-card">
                   <div className="job-search-card-body">
                     <div className="job-search-card-heading">
                       Movers (includes going upstairs)
@@ -343,7 +313,7 @@ export const JobSearch = () => {
                   </div>
                 </div>
 
-                <div className="job-search-job-card" onClick={() => navigate("/jobs/6")} style={{ cursor: 'pointer' }}>
+                <div className="job-search-job-card">
                   <div className="job-search-card-body">
                     <div className="job-search-card-heading">
                       Housekeeping and co.
