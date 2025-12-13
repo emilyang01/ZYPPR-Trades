@@ -1,19 +1,12 @@
 // routes/jobs.js
 import express from "express";
-import { requireAuth } from "../middleware/auth.js"; // only used for create
+import { requireAuth } from "../middleware/auth.js";
 import { searchJobs } from "../services/searchService.js";
 import Job from "../models/job.js";
 
 const router = express.Router();
 
-/**
- * GET /api/jobs
- * Public job search with filters
- *
- * Query examples:
- *   /api/jobs?q=plumber&city=Sacramento&minRate=20&maxRate=60
- *   /api/jobs?category=plumbing
- */
+// ✅ public search
 router.get("/", async (req, res) => {
   try {
     const jobs = await searchJobs(req.query);
@@ -24,10 +17,22 @@ router.get("/", async (req, res) => {
   }
 });
 
-/**
- * POST /api/jobs
- * Create job (requires auth)
- */
+// ✅ NEW: get one job by id (public)
+router.get("/:jobId", async (req, res) => {
+  try {
+    const job = await Job.findById(req.params.jobId)
+      .populate("posted_by", "first_name last_name email city")
+      .lean();
+
+    if (!job) return res.status(404).json({ message: "Job not found" });
+    res.json(job);
+  } catch (err) {
+    console.error("Get job error:", err);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
+// create job (requires auth)
 router.post("/", requireAuth, async (req, res) => {
   try {
     const job = await Job.create({

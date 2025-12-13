@@ -14,6 +14,9 @@ import { Reviews } from './components/Reviews/Reviews.jsx';
 import { UserFeedback } from './components/UserFeedback/UserFeedback.jsx';
 import { UserSearch } from './components/UserSearch/UserSearch.jsx';
 import { ViewUserDetails } from './components/ViewUserDetails/ViewUserDetails.jsx';
+import { UserDashboard } from "./components/UserDashboard/UserDashboard";
+import { PostJob } from "./components/PostJob/PostJob";
+import { JobConfirmation } from "./components/JobConfirmation/JobConfirmation.jsx";
 
 function App() {
   return (
@@ -63,23 +66,12 @@ function App() {
         {/* Report Routes */}
         <Route path="/report/user/:userId" element={<ReportUserOrJob />} />
         <Route path="/report/job/:jobId" element={<ReportUserOrJob />} />
+        <Route path="/dashboard" element={<UserDashboard />} />
+<Route path="/jobs/new" element={<PostJob />} />   {/* post job page */}
+<Route path="/jobs/:jobId/confirm" element={<JobConfirmation />} />
+
         
-        {/* User Dashboard (placeholder) */}
-        <Route 
-          path="/dashboard" 
-          element={
-            <div style={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              height: '100vh',
-              fontSize: '24px',
-              fontFamily: 'Open Sans, Helvetica'
-            }}>
-              🎉 User Dashboard - Coming Soon!
-            </div>
-          } 
-        />
+        
 
         {/* Catch-all redirect - must be last */}
         <Route path="*" element={<Navigate to="/login" replace />} />

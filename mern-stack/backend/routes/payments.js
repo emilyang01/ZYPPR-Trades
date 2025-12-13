@@ -7,23 +7,27 @@ import {
   capturePayPalOrder,
 } from "../services/paypalClient.js";
 
+
 const router = express.Router();
 
 /**
  * POST /api/payments/create-order
  */
+// routes/payments.js
 router.post("/create-order", requireAuth, async (req, res) => {
   try {
-    const { amount, currency = "USD", jobId, providerId } = req.body;
+    const { currency = "USD", jobId, providerId } = req.body;
 
-    if (!amount || amount <= 0) {
-      return res.status(400).json({ message: "Amount must be > 0" });
-    }
+    // ✅ FORCE amount on server (don’t trust client)
+    const amount = 27.0;
 
     const paypalOrder = await createPayPalOrder({
-      value: amount,
+      value: amount.toFixed(2), // "27.00"
       currency,
       description: jobId ? `Payment for job ${jobId}` : "ZYPPR Trades Payment",
+      // optional: return/cancel urls if your paypalClient supports it
+      // return_url: "http://localhost:5173/payment/success",
+      // cancel_url: "http://localhost:5173/payment/cancel",
     });
 
     const payment = await Payment.create({
@@ -42,6 +46,7 @@ router.post("/create-order", requireAuth, async (req, res) => {
     res.status(500).json({ message: "Error creating payment" });
   }
 });
+
 
 /**
  * POST /api/payments/capture
