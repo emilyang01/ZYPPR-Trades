@@ -101,7 +101,7 @@ export const JobDetails = () => {
     .filter(Boolean);
 
   const user = JSON.parse(localStorage.getItem("user") || "{}");
-
+ const userName = user?.name || user?.first_name || "User";
   return (
     <main className="job-details">
       {/* Shared Header */}
