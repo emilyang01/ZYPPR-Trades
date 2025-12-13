@@ -4,32 +4,32 @@
   font-family: "Open Sans", Arial, sans-serif;
 }
 
-.confirm-header {
+/* User chip specific to confirmation page */
+.confirm-userchip {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 14px 18px;
-}
-
-.confirm-back {
-  border: none;
-  background: transparent;
-  font-size: 28px;
+  gap: 8px;
+  background: #f5f5f5;
+  border: 1px solid #e0e0e0;
   cursor: pointer;
+  font-size: 13px;
+  color: #333333;
+  font-weight: 400;
+  padding: 6px 12px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
 }
 
-.confirm-brand {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  color: #0b6fff;
-  font-weight: 800;
-  font-size: 30px;
+.confirm-userchip:hover {
+  background-color: #eeeeee;
 }
 
-.confirm-brand img {
-  width: 56px;
-  height: 60px;
+.confirm-avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  flex-shrink: 0;
 }
 
 .confirm-center {

@@ -7,91 +7,8 @@
   font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
-/* Header */
-.job-header {
-  background-color: #ffffff;
-  border-bottom: 1px solid #e0e0e0;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-}
-
-.header-content {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 16px 24px;
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.logo-section {
-  display: flex;
-  align-items: center;
-  gap: 0px;
-}
-
-.back-button {
-  background: none;
-  border: none;
-  color: #333;
-  cursor: pointer;
-  padding: 6px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: color 0.2s ease;
-  border-radius: 4px;
-  margin-right: 12px;
-}
-
-.back-button:hover {
-  color: #0b6fff;
-  background-color: #f5f5f5;
-}
-
-.logo-image {
-  width: 55px;
-  height: 61px;
-}
-
-.logo-text {
-  font-size: 28px;
-  font-weight: 700;
-  color: #0b6fff;
-  margin: 0;
-  margin-left: -8px;
-}
-
-/* Navigation */
-.main-navigation {
-  display: flex;
-  align-items: center;
-  gap: 24px;
-  margin-left: auto;
-}
-
-.nav-link {
-  background: none;
-  border: none;
-  color: #333333;
-  font-size: 13px;
-  font-weight: 500;
-  cursor: pointer;
-  padding: 4px 8px;
-  transition: color 0.2s ease;
-}
-
-.nav-link:hover {
-  color: #f47920;
-}
-
-/* Header Auth */
-.header-auth {
-  display: flex;
-  align-items: center;
-  margin-left: 16px;
-}
-
-.user-button {
+/* Job Details specific user chip */
+.job-details-userchip {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -101,16 +18,16 @@
   font-size: 13px;
   color: #333333;
   font-weight: 400;
-  padding: 6px 10px;
+  padding: 6px 12px;
   border-radius: 4px;
   transition: all 0.2s ease;
 }
 
-.user-button:hover {
+.job-details-userchip:hover {
   background-color: #eeeeee;
 }
 
-.avatar {
+.job-details-avatar {
   width: 24px;
   height: 24px;
   border-radius: 50%;
@@ -139,35 +56,18 @@
 .job-card-header {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 12px;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
   padding-bottom: 16px;
   border-bottom: 1px solid #e8e8e8;
 }
 
-.back-link {
-  background: none;
-  border: none;
-  color: #333333;
-  cursor: pointer;
-  padding: 4px 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: color 0.2s ease;
-  flex-shrink: 0;
-}
-
-.back-link:hover {
-  color: #f47920;
-}
-
 .card-title {
-  font-size: 32px;
+  font-size: 24px;
   font-weight: 700;
   color: #000000;
   margin: 0;
-  flex: 1;
 }
 
 .posted-date {
@@ -177,20 +77,25 @@
   white-space: nowrap;
 }
 
-.job-title {
-  font-size: 140px;
-  font-weight: 700;
-  color: #000000;
-  margin: 0 0 24px 0;
-  line-height: 1.2;
+/* Loading and Error States */
+.job-loading,
+.job-error {
+  padding: 40px 20px;
+  text-align: center;
+  font-size: 14px;
+  color: #666;
 }
 
-/* Job Info Grid */
-.job-info-grid {
+.job-error {
+  color: #d32f2f;
+}
+
+/* Job Info Sections */
+.job-info-sections {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 24px;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 }
 
 .section-heading {
@@ -393,6 +298,9 @@
 
   .main-navigation {
     gap: 16px;
+  }sections {
+    grid-template-columns: 1fr;
+    gap: 20px;
   }
 
   .job-content {
@@ -400,7 +308,7 @@
   }
 
   .job-card {
-    padding: 16px 20px;
+    padding: 20px;
   }
 
   .job-card-footer {
@@ -416,22 +324,24 @@
   .apply-button {
     width: 100%;
   }
+
+  .card-title {
+    font-size: 20px;
+  }
 }
 
 @media (max-width: 480px) {
-  .logo-text {
-    font-size: 18px;
+  .job-card {
+    padding: 16px;
   }
 
-  .nav-link {
-    font-size: 12px;
-  }
-
-  .job-title {
+  .card-title {
     font-size: 18px;
   }
 
   .pay-amount {
-    font-size: 18px;
+    font-size: 20px;
   }
-}
+
+  .section-heading {
+    font-size: 13

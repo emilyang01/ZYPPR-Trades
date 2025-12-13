@@ -13,6 +13,9 @@ export const AdminSignUp = () => {
   
   const [errors, setErrors] = useState({});
   const [touched, setTouched] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
+  const [apiError, setApiError] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
 
   const validateField = (name, value) => {
     switch (name) {
@@ -55,7 +58,7 @@ export const AdminSignUp = () => {
     setErrors(prev => ({ ...prev, [name]: validateField(name, value) }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     
     const newErrors = {
@@ -68,11 +71,45 @@ export const AdminSignUp = () => {
     setTouched({ name: true, email: true, password: true });
     
     if (!newErrors.name && !newErrors.email && !newErrors.password) {
-      // TODO: Backend API call here
-      console.log("Form submitted:", formData);
-      // Example: await fetch('/api/admin/signup', { method: 'POST', body: JSON.stringify(formData) })
-      // For now, navigate to admin login
-      navigate("/admin/login");
+      setIsLoading(true);
+      setApiError("");
+      
+      try {
+        // Split name into first and last name
+        const nameParts = formData.name.trim().split(' ');
+        const first_name = nameParts[0];
+        const last_name = nameParts.slice(1).join(' ') || nameParts[0];
+        
+        const res = await fetch("http://localhost:5000/api/auth/register", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            email: formData.email,
+            password: formData.password,
+            first_name,
+            last_name,
+            role: "admin" // Force admin role
+          }),
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+          setApiError(data.message || "Signup failed");
+          return;
+        }
+
+        setSuccessMessage("Admin account created! Redirecting to login...");
+
+        setTimeout(() => {
+          navigate("/admin/login");
+        }, 1500);
+
+      } catch (err) {
+        setApiError("Unable to connect to the server. Please try again.");
+      } finally {
+        setIsLoading(false);
+      }
     }
   };
 
@@ -92,6 +129,9 @@ export const AdminSignUp = () => {
         <img className="logo" alt="ZYPPR Trades" src={logo} />
         
         <h1 className="title">Admin Sign Up</h1>
+        
+        {apiError && <div style={{padding: '12px', marginBottom: '16px', backgroundColor: '#fee', border: '1px solid #fcc', borderRadius: '6px', color: '#c33'}}><span>{apiError}</span></div>}
+        {successMessage && <div style={{padding: '12px', marginBottom: '16px', backgroundColor: '#efe', border: '1px solid #cfc', borderRadius: '6px', color: '#3c3'}}><span>{successMessage}</span></div>}
         
         <form onSubmit={handleSubmit} noValidate>
           <div className="form-group">
@@ -145,8 +185,8 @@ export const AdminSignUp = () => {
             )}
           </div>
 
-          <button type="submit" className="submit-button">
-            Sign Up
+          <button type="submit" className="submit-button" disabled={isLoading}>
+            {isLoading ? "Creating Account..." : "Sign Up"}
           </button>
         </form>
 

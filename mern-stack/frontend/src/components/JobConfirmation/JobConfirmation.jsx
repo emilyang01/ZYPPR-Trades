@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import IMG12581 from "../JobDetails/IMG-1258-1.png"; // <-- adjust path if needed
+import IMG12581 from "./IMG_1258 1.png";
 import "./JobConfirmation.css";
+import "../SharedHeader/SharedHeader.css";
 
 export const JobConfirmation = () => {
   const navigate = useNavigate();
@@ -143,16 +144,35 @@ export const JobConfirmation = () => {
     );
   }
 
+  const user = JSON.parse(localStorage.getItem("user") || "{}");
+  const userName = user?.name || (user?.first_name && user?.last_name ? `${user.first_name} ${user.last_name}` : user?.email?.split('@')[0] || "User");
+
   return (
     <div className="confirm-page">
-      <header className="confirm-header">
-        <button className="confirm-back" onClick={() => navigate(-1)}>
-          ‹
-        </button>
+      <header className="shared-header">
+        <div className="shared-header-content">
+          <button className="shared-back-button" aria-label="Go back" onClick={() => navigate(-1)}>
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </button>
 
-        <div className="confirm-brand">
-          <img src={IMG12581} alt="logo" />
-          <span>YPPR Trades</span>
+          <button className="shared-logo-section" onClick={() => navigate("/")} style={{background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '12px'}}>
+            <img className="shared-logo-image" alt="ZYPPR logo" src={IMG12581} />
+            <h1 className="shared-logo-text">YPPR Trades</h1>
+          </button>
+
+          <nav className="shared-main-navigation" aria-label="Main navigation">
+            <button className="shared-nav-link" onClick={() => navigate("/jobs")}>Jobs</button>
+            <button className="shared-nav-link" onClick={() => navigate("/customer-service")}>Customer Service</button>
+          </nav>
+
+          <div className="shared-header-auth">
+            <button className="confirm-userchip" onClick={() => navigate("/dashboard")}>
+              <span>{userName}</span>
+              <div className="confirm-avatar" />
+            </button>
+          </div>
         </div>
       </header>
 

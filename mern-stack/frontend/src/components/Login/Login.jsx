@@ -115,10 +115,6 @@ setTimeout(() => {
           />
         </div>
 
-        <div className="text-wrapper-4" onClick={() => navigate("/forgot-password")} style={{ cursor: "pointer" }}>
-          Forgot password
-        </div>
-
         <button type="submit" className="rectangle-3" disabled={isLoading}>
           <div className="text-wrapper-9">{isLoading ? "Logging in..." : "Login"}</div>
         </button>

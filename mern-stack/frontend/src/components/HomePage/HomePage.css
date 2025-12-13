@@ -1,0 +1,353 @@
+/* ================================
+   ZYPPR Trades Homepage Styles
+   ================================ */
+
+/* CSS Variables */
+:root {
+  --color-primary: #f97316;
+  --color-primary-hover: #ea580c;
+  --color-text-dark: #1a1a1a;
+  --color-text-medium: #4a4a4a;
+  --color-text-light: #6b7280;
+  --color-border: #d1d5db;
+  --color-border-hover: #9ca3af;
+  --color-white: #ffffff;
+  --color-background: #f5f5f5;
+  --color-footer-bg: #e8e8e8;
+  
+  --font-primary: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --font-display: Georgia, 'Times New Roman', serif;
+  
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 0.75rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+  
+  --border-radius-sm: 4px;
+  --border-radius-md: 6px;
+  --border-radius-lg: 20px;
+  --border-radius-full: 9999px;
+  
+  --transition-fast: 150ms ease;
+  --transition-normal: 200ms ease;
+}
+
+/* Reset & Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.home-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-primary);
+  background-color: var(--color-white);
+  background-image: none !important;
+  background: var(--color-white) !important;
+}
+
+/* ================================
+   Header Styles
+   ================================ */
+.main-header {
+  position: relative;
+  z-index: 100;
+  background-color: var(--color-white);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-sm) var(--spacing-xl);
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Brand Section */
+.brand-section {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.back-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--color-text-medium);
+  transition: color var(--transition-fast);
+}
+
+.back-button:hover {
+  color: var(--color-text-dark);
+}
+
+.brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-image {
+  width: 62px;
+  height: 68px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.logo-text {
+  font-size: 32px;
+  font-weight: 600;
+  color: #3b82f6;
+  font-family: "Open Sans", var(--font-primary);
+  letter-spacing: -0.5px;
+  white-space: nowrap;
+  margin: 0;
+}
+
+/* Navigation Links */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.nav-link {
+  background: transparent;
+  border: none;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--color-text-medium);
+  cursor: pointer;
+  transition: color var(--transition-fast);
+  font-family: var(--font-primary);
+}
+
+.nav-link:hover {
+  color: var(--color-text-dark);
+}
+
+/* Auth Buttons */
+.auth-buttons {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.btn {
+  padding: 0.625rem 1.25rem;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: var(--border-radius-md);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  font-family: var(--font-primary);
+}
+
+.btn-outline {
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-dark);
+}
+
+.btn-outline:hover {
+  border-color: var(--color-border-hover);
+  background-color: var(--color-background);
+}
+
+.btn-primary {
+  background: var(--color-primary);
+  border: 1px solid var(--color-primary);
+  color: var(--color-white);
+}
+
+.btn-primary:hover {
+  background: var(--color-primary-hover);
+  border-color: var(--color-primary-hover);
+}
+
+/* ================================
+   Hero Section Styles
+   ================================ */
+.hero-section {
+  width: 100%;
+  height: 450px;
+  overflow: hidden;
+  position: relative;
+  background: none;
+}
+
+.hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* ================================
+   About Section Styles
+   ================================ */
+.about-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-2xl) var(--spacing-xl);
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.about-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--color-text-dark);
+  margin-bottom: var(--spacing-lg);
+  font-family: var(--font-primary);
+}
+
+.about-description {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--color-text-medium);
+  max-width: 650px;
+}
+
+/* ================================
+   Footer Styles
+   ================================ */
+.admin-footer {
+  background-color: var(--color-footer-bg);
+  padding: var(--spacing-lg) var(--spacing-xl);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.admin-footer .btn-outline {
+  background: var(--color-white);
+  padding: var(--spacing-xs) var(--spacing-lg);
+}
+
+/* ================================
+   Responsive Styles
+   ================================ */
+@media (max-width: 1024px) {
+  .header-content {
+    padding: var(--spacing-sm) var(--spacing-lg);
+  }
+  
+  .nav-links {
+    gap: var(--spacing-sm);
+  }
+  
+  .nav-link {
+    font-size: 0.85rem;
+    padding: var(--spacing-xs);
+  }
+}
+
+@media (max-width: 768px) {
+  .header-content {
+    flex-wrap: wrap;
+    gap: var(--spacing-md);
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
+  
+  .brand-section {
+    order: 1;
+  }
+  
+  .auth-buttons {
+    order: 2;
+  }
+  
+  .nav-links {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+    padding-top: var(--spacing-sm);
+    border-top: 1px solid var(--color-border);
+  }
+  
+  .hero-section {
+    height: 350px;
+  }
+  
+  .about-section {
+    padding: var(--spacing-xl) var(--spacing-md);
+  }
+  
+  .about-title {
+    font-size: 1.5rem;
+  }
+  
+  .about-description {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .back-button {
+    display: none;
+  }
+  
+  .brand-title {
+    font-size: 1.25rem;
+  }
+  
+  .logo-icon {
+    width: 30px;
+    height: 30px;
+  }
+  
+  .logo-z {
+    font-size: 1.25rem;
+  }
+  
+  .nav-links {
+    flex-wrap: wrap;
+    gap: var(--spacing-xs);
+  }
+  
+  .nav-link {
+    font-size: 0.8rem;
+  }
+  
+  .btn {
+    padding: var(--spacing-xs) var(--spacing-sm);
+    font-size: 0.8rem;
+  }
+  
+  .hero-section {
+    height: 280px;
+  }
+  
+  .about-section {
+    padding: var(--spacing-lg) var(--spacing-md);
+  }
+  
+  .about-title {
+    font-size: 1.25rem;
+  }
+  
+  .about-description {
+    font-size: 0.85rem;
+    line-height: 1.6;
+  }
+}

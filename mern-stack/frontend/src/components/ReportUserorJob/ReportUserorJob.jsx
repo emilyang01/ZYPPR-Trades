@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./style.css";
 
 export const ReportUserOrJob = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     reason: "",
     additionalInfo: "",
@@ -9,6 +11,7 @@ export const ReportUserOrJob = () => {
   
   const [errors, setErrors] = useState({});
   const [isOpen, setIsOpen] = useState(false);
+  const [showOverlay, setShowOverlay] = useState(false);
 
   const reportReasons = [
     "Inappropriate content",
@@ -62,14 +65,18 @@ export const ReportUserOrJob = () => {
     console.log("Report submitted:", formData);
     // Example: await fetch('/api/report', { method: 'POST', body: JSON.stringify(formData) })
     
-    // Close modal or navigate away
-    handleCancel();
+    // Show message sent overlay
+    setShowOverlay(true);
   };
 
   const handleCancel = () => {
-    // TODO: Close modal or navigate back
-    console.log("Report cancelled");
-    // Example: onClose() or navigate(-1)
+    // Navigate back to previous page
+    navigate(-1);
+  };
+
+  const handleCloseOverlay = () => {
+    setShowOverlay(false);
+    navigate(-1);
   };
 
   return (
@@ -162,6 +169,18 @@ export const ReportUserOrJob = () => {
           </button>
         </div>
       </div>
+
+      {/* Message Sent Overlay */}
+      {showOverlay && (
+        <div className="report-overlay" onClick={handleCloseOverlay}>
+          <div className="report-overlay-content" onClick={(e) => e.stopPropagation()}>
+            <p className="report-overlay-message">Your Report Has Been Sent.</p>
+            <button className="report-overlay-button" onClick={handleCloseOverlay}>
+              OK
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

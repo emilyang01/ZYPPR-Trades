@@ -195,3 +195,147 @@
   font-size: 22px;
   cursor: pointer;
 }
+
+/* New form styles */
+.postjob-card-header h2 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.postjob-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.postjob-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.postjob-label {
+  font-weight: 600;
+  font-size: 16px;
+  color: #333;
+}
+
+.postjob-input,
+.postjob-select {
+  width: 100%;
+  height: 44px;
+  border: 1px solid #bdbdbd;
+  border-radius: 4px;
+  padding: 0 12px;
+  font-size: 16px;
+  outline: none;
+  font-family: inherit;
+}
+
+.postjob-input:focus,
+.postjob-select:focus,
+.postjob-textarea:focus {
+  border-color: #0b6fff;
+}
+
+.postjob-textarea {
+  width: 100%;
+  border: 1px solid #bdbdbd;
+  border-radius: 4px;
+  padding: 12px;
+  font-size: 16px;
+  font-family: inherit;
+  resize: vertical;
+  outline: none;
+}
+
+.postjob-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.postjob-images-row {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.postjob-image-box {
+  width: 150px;
+  height: 150px;
+  border: 2px dashed #bdbdbd;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fafafa;
+  overflow: hidden;
+  position: relative;
+}
+
+.postjob-image-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.postjob-add-image {
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.postjob-add-image:hover {
+  border-color: #0b6fff;
+  background: #f0f7ff;
+}
+
+.postjob-plus {
+  font-size: 48px;
+  color: #bdbdbd;
+  font-weight: 300;
+}
+
+.postjob-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.postjob-cancel-btn,
+.postjob-post-btn {
+  height: 44px;
+  padding: 0 32px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+}
+
+.postjob-cancel-btn {
+  background: #f2f2f2;
+  color: #333;
+}
+
+.postjob-cancel-btn:hover {
+  background: #e5e5e5;
+}
+
+.postjob-post-btn {
+  background: #0b6fff;
+  color: white;
+}
+
+.postjob-post-btn:hover {
+  background: #0956d4;
+}
+
+@media (max-width: 768px) {
+  .postjob-row {
+    grid-template-columns: 1fr;
+  }
+}

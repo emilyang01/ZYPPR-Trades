@@ -1,38 +1,69 @@
+/* ===== Google Font Import ===== */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
 /* ===== Layout ===== */
 .user-dashboard {
   min-height: 100vh;
-  background: #f4f4f4;
-  font-family: Inter, sans-serif;
+  background: #e8eaed;
+  font-family: 'Inter', sans-serif;
 }
 
 /* ===== Header ===== */
 .ud-header {
   display: flex;
   align-items: center;
-  padding: 14px 24px;
-  background: white;
-  border-bottom: 1px solid #e5e5e5;
+  padding: 16px 32px;
+  background: transparent;
 }
 
 .ud-back {
   background: none;
   border: none;
-  font-size: 20px;
+  font-size: 24px;
   cursor: pointer;
+  color: #333;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.ud-logo {
-  font-size: 22px;
-  font-weight: 700;
-  color: #1e6bff;
+.ud-back img {
+  width: 12px;
+  height: auto;
+}
+
+.ud-logo-container {
+  display: flex;
+  align-items: center;
   margin-left: 16px;
+}
+
+.ud-logo-icon {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+.ud-logo-text {
+  font-size: 28px;
+  font-weight: 700;
+  margin-left: 4px;
+}
+
+.ud-logo-text .blue {
+  color: #2563eb;
+}
+
+.ud-logo-text .black {
+  color: #1a1a1a;
 }
 
 .ud-topnav {
   margin-left: auto;
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 32px;
 }
 
 .ud-topnav button {
@@ -40,79 +71,398 @@
   border: none;
   cursor: pointer;
   font-weight: 500;
+  font-size: 14px;
+  color: #333;
+}
+
+.ud-topnav button:hover {
+  color: #2563eb;
 }
 
 .ud-userchip {
-  padding: 6px 12px;
-  border-radius: 20px;
-  background: #f0f0f0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 24px;
+  background: #fff;
+  border: 1px solid #e5e5e5;
+  font-size: 14px;
+}
+
+.ud-userchip-avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #ddd;
+}
+
+/* ===== User Banner ===== */
+.ud-user-banner {
+  margin: 0 32px;
+  padding: 20px 24px;
+  background: #d1d5db;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.ud-user-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #ccc;
+}
+
+.ud-user-name {
+  font-size: 22px;
+  font-weight: 600;
+  color: #1a1a1a;
 }
 
 /* ===== Body ===== */
 .ud-body {
   display: flex;
-  padding: 24px;
+  padding: 24px 32px;
+  gap: 24px;
 }
 
 /* ===== Sidebar ===== */
 .ud-sidebar {
-  width: 220px;
-  background: white;
-  border-radius: 14px;
-  padding: 16px;
-  margin-right: 24px;
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .ud-sideitem {
   width: 100%;
-  padding: 12px 14px;
-  border-radius: 10px;
+  padding: 14px 20px;
+  border-radius: 12px;
   border: none;
-  background: none;
+  background: transparent;
   text-align: left;
   cursor: pointer;
   font-weight: 500;
+  font-size: 16px;
+  color: #333;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: all 0.2s ease;
+}
+
+.ud-sideitem:hover {
+  background: #f0f0f0;
 }
 
 .ud-sideitem.active {
-  background: #1e6bff;
+  background: #2563eb;
   color: white;
+}
+
+.ud-sideitem .icon {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* ===== Main ===== */
 .ud-main {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
-/* ===== Quick Actions ===== */
-.ud-quickactions {
+/* ===== Cards Grid ===== */
+.ud-cards-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+/* ===== Card Base ===== */
+.ud-card {
   background: white;
-  padding: 20px;
   border-radius: 16px;
-  margin-top: 24px;
+  padding: 20px;
 }
 
-.ud-qa-title {
+.ud-card-title {
+  font-size: 18px;
   font-weight: 700;
+  color: #1a1a1a;
   margin-bottom: 16px;
 }
 
-.ud-qa-row {
+/* ===== Current Jobs Card ===== */
+.ud-job-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ud-job-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  background: #f8f9fa;
+  border-radius: 12px;
+}
+
+.ud-job-icon {
+  width: 48px;
+  height: 48px;
+  background: #fff;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #e5e5e5;
+}
+
+.ud-job-icon img {
+  width: 28px;
+  height: 28px;
+}
+
+.ud-job-info {
+  flex: 1;
+}
+
+.ud-job-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1a1a1a;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ud-job-date {
+  font-size: 12px;
+  color: #666;
+  margin-top: 2px;
+}
+
+.ud-job-badge {
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  background: #2563eb;
+  color: white;
+}
+
+.ud-job-badge.payment {
+  background: #2563eb;
+}
+
+/* ===== Jobs Completed Card ===== */
+.ud-completed-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  background: #f8f9fa;
+  border-radius: 12px;
+}
+
+.ud-completed-icon {
+  width: 48px;
+  height: 48px;
+  background: #fff;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #e5e5e5;
+}
+
+.ud-completed-icon img {
+  width: 28px;
+  height: 28px;
+}
+
+.ud-completed-info {
+  flex: 1;
+}
+
+.ud-completed-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1a1a1a;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ud-completed-name .checkmark {
+  color: #22c55e;
+}
+
+.ud-completed-date {
+  font-size: 12px;
+  color: #666;
+  margin-top: 2px;
+}
+
+/* ===== Earnings Card ===== */
+.ud-earnings-grid {
+  display: flex;
+  gap: 40px;
+}
+
+.ud-earning-item {
+  text-align: center;
+}
+
+.ud-earning-amount {
+  font-size: 32px;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.ud-earning-label {
+  font-size: 14px;
+  color: #666;
+  margin-top: 4px;
+}
+
+.ud-earnings-divider {
+  width: 1px;
+  background: #e5e5e5;
+}
+
+/* ===== Reviews Card ===== */
+.ud-stars {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 12px;
+}
+
+.ud-star {
+  color: #2563eb;
+  font-size: 20px;
+}
+
+.ud-star.empty {
+  color: #2563eb;
+  opacity: 0.3;
+}
+
+.ud-review-text {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.5;
+}
+
+/* ===== Job Categories Card ===== */
+.ud-categories-grid {
   display: flex;
   gap: 16px;
 }
 
+.ud-category-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 24px;
+  background: #f8f9fa;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.ud-category-item:hover {
+  background: #e5e5e5;
+}
+
+.ud-category-icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ud-category-icon img {
+  width: 32px;
+  height: 32px;
+}
+
+.ud-category-label {
+  font-size: 13px;
+  color: #333;
+  font-weight: 500;
+}
+
+/* ===== Quick Actions Card ===== */
+.ud-qa-grid {
+  display: flex;
+  gap: 12px;
+}
+
 .ud-qa-btn {
   flex: 1;
-  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 16px;
   border-radius: 14px;
   border: none;
   cursor: pointer;
-  font-weight: 600;
+  font-weight: 500;
+  font-size: 13px;
   background: #f2f2f2;
+  color: #333;
+  transition: all 0.2s ease;
+}
+
+.ud-qa-btn:hover {
+  background: #e5e5e5;
 }
 
 .ud-qa-btn.primary {
-  background: #ff7a1a;
+  background: #f97316;
   color: white;
+}
+
+.ud-qa-btn.primary:hover {
+  background: #ea580c;
+}
+
+.ud-qa-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+}
+
+.ud-qa-btn.primary .ud-qa-icon {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* ===== SVG Icons ===== */
+.sidebar-icon {
+  width: 20px;
+  height: 20px;
+}
+
+/* ===== Star Rating Image ===== */
+.ud-stars-img {
+  height: 24px;
+  width: auto;
+  margin-bottom: 12px;
 }

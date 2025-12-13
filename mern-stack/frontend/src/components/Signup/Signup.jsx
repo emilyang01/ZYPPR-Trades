@@ -46,28 +46,32 @@ export const Signup = () => {
 
     setIsLoading(true);
     try {
-      // TODO: REMOVE THIS MOCK SIGNUP BLOCK WHEN BACKEND IS READY
-      // This is temporary for frontend-only testing without backend connection
-      // Original API call code is commented below:
-      /*
+      // Split name into first and last name
+      const nameParts = name.trim().split(' ');
+      const first_name = nameParts[0] || name;
+      const last_name = nameParts.slice(1).join(' ') || nameParts[0];
+
       const res = await fetch("http://localhost:5000/api/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, password }),
+        body: JSON.stringify({ first_name, last_name, email, password }),
       });
       const data = await res.json();
       if (!res.ok) {
         setError(data.message || "Sign up failed");
         return;
       }
-      */
       
-      // MOCK SIGNUP: Replace with real API call above
+      // Store the token for auto-login
+      if (data.token) {
+        localStorage.setItem("authToken", data.token);
+      }
+      
       setSuccessMessage("Account created successfully! Redirecting...");
       setName("");
       setEmail("");
       setPassword("");
-      setTimeout(() => navigate("/login"), 2000);
+      setTimeout(() => navigate("/dashboard"), 2000);
     } catch (err) {
       setError("Unable to connect. Please check your internet connection.");
     } finally {

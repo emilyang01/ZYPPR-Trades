@@ -22,6 +22,15 @@ export const AdminDashboard = () => {
   const [loading, setLoading] = useState(false);
   const [searchError, setSearchError] = useState("");
 
+  // Check if user is admin on mount
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user") || "{}");
+    if (!user || user.role !== "admin") {
+      alert("Access denied. Admin privileges required.");
+      navigate("/");
+    }
+  }, [navigate]);
+
   const runAdminUserSearch = async (q) => {
     const token = localStorage.getItem("authToken");
     if (!token) {
@@ -84,15 +93,14 @@ export const AdminDashboard = () => {
             <path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
           </svg>
         </button>
-        <div className="header-logo">
+        <button className="header-logo" onClick={() => navigate("/")} style={{background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '12px'}}>
           <img className="logo-image" alt="ZYPPR logo" src={IMG12581} />
           <h1 className="logo-text">YPPR Trades</h1>
-        </div>
+        </button>
 
         <nav className="navigation" aria-label="Main navigation">
           <button className="nav-button" onClick={() => navigate("/jobs")}>Jobs</button>
-          <button className="nav-button">About ZYPPR</button>
-          <button className="nav-button">Customer Service</button>
+          <button className="nav-button" onClick={() => navigate("/customer-service")}>Customer Service</button>
         </nav>
 
         <div className="header-auth">

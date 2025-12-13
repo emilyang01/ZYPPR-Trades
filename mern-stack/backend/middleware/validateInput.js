@@ -1,10 +1,13 @@
 // backend/middleware/validateInput.js
 export const validateRegisterInput = (req, res, next) => {
-  const { name, email, password } = req.body;
+  const { name, first_name, last_name, email, password } = req.body;
 
-  // 1) All fields present?
-  if (!name || !email || !password) {
-    return res.status(400).json({ message: "All fields are required" });
+  // 1) All fields present? (accept either name OR first_name/last_name)
+  if (!email || !password) {
+    return res.status(400).json({ message: "Email and password are required" });
+  }
+  if (!name && !first_name && !last_name) {
+    return res.status(400).json({ message: "Name is required" });
   }
 
   // 2) Password length

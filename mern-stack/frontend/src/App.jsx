@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import HomePage from './components/HomePage/HomePage.jsx';
 import { Login } from './components/Login/Login.jsx';
 import { Signup } from './components/Signup/Signup.jsx';
 import { AdminLogin } from './components/AdminLogin/AdminLogin.jsx';
@@ -10,6 +11,7 @@ import { EditWarningMessage } from './components/EditWarningMessage/EditWarningM
 import { JobDetails } from './components/JobDetails/JobDetails.jsx';
 import { JobSearch } from './components/JobSearch/JobSearch.jsx';
 import { NotificationSent } from './components/NotificationSent/NotificationSent.jsx';
+import { Notifications } from './components/Notifications/Notifications.jsx';
 import { Reviews } from './components/Reviews/Reviews.jsx';
 import { UserFeedback } from './components/UserFeedback/UserFeedback.jsx';
 import { UserSearch } from './components/UserSearch/UserSearch.jsx';
@@ -17,33 +19,19 @@ import { ViewUserDetails } from './components/ViewUserDetails/ViewUserDetails.js
 import { UserDashboard } from "./components/UserDashboard/UserDashboard";
 import { PostJob } from "./components/PostJob/PostJob";
 import { JobConfirmation } from "./components/JobConfirmation/JobConfirmation.jsx";
+import { Messages } from "./components/Messages/Messages.jsx";
+import { CustomerService } from "./components/CustomerService/CustomerService.jsx";
 
 function App() {
   return (
     <Router>
       <Routes>
-        {/* Default redirect to login */}
-        <Route path="/" element={<Navigate to="/login" replace />} />
+        {/* Default Home Page */}
+        <Route path="/" element={<HomePage />} />
         
         {/* User Authentication Routes */}
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        <Route 
-          path="/forgot-password" 
-          element={
-            <div style={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              height: '100vh',
-              fontSize: '24px',
-              fontFamily: 'Open Sans, Helvetica'
-            }}>
-              :closed_lock_with_key: Forgot Password - Coming Soon!
-            </div>
-          } 
-        />
-      
 
         {/* Admin Authentication Routes */}
         <Route path="/admin/login" element={<AdminLogin />} />
@@ -69,6 +57,9 @@ function App() {
         <Route path="/dashboard" element={<UserDashboard />} />
 <Route path="/jobs/new" element={<PostJob />} />   {/* post job page */}
 <Route path="/jobs/:jobId/confirm" element={<JobConfirmation />} />
+<Route path="/messages" element={<Messages />} />
+<Route path="/notifications" element={<Notifications />} />
+<Route path="/customer-service" element={<CustomerService />} />
 
         
         

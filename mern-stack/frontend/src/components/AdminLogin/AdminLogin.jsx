@@ -12,6 +12,9 @@ export const AdminLogin = () => {
   
   const [errors, setErrors] = useState({});
   const [touched, setTouched] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
+  const [apiError, setApiError] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
 
   const validateField = (name, value) => {
     switch (name) {
@@ -45,7 +48,7 @@ export const AdminLogin = () => {
     setErrors(prev => ({ ...prev, [name]: validateField(name, value) }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     
     const newErrors = {
@@ -57,11 +60,43 @@ export const AdminLogin = () => {
     setTouched({ email: true, password: true });
     
     if (!newErrors.email && !newErrors.password) {
-      // TODO: Backend API call here
-      console.log("Form submitted:", formData);
-      // Example: await fetch('/api/admin/login', { method: 'POST', body: JSON.stringify(formData) })
-      // For now, navigate to admin dashboard
-      navigate("/admin/dashboard");
+      setIsLoading(true);
+      setApiError("");
+      
+      try {
+        const res = await fetch("http://localhost:5000/api/auth/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData),
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+          setApiError(data.message || "Login failed");
+          return;
+        }
+
+        // Check if user is actually an admin
+        if (data.user?.role !== "admin") {
+          setApiError("Access denied. Admin privileges required.");
+          return;
+        }
+
+        localStorage.setItem("authToken", data.token);
+        localStorage.setItem("user", JSON.stringify(data.user));
+
+        setSuccessMessage("Admin login successful! Redirecting...");
+
+        setTimeout(() => {
+          navigate("/admin/dashboard");
+        }, 1000);
+
+      } catch (err) {
+        setApiError("Unable to connect to the server. Please try again.");
+      } finally {
+        setIsLoading(false);
+      }
     }
   };
 
@@ -69,9 +104,6 @@ export const AdminLogin = () => {
     navigate("/admin/signup");
   };
 
-  const handleForgotPassword = () => {
-    navigate("/forgot-password");
-  };
 
   return (
     <div className="admin-login">
@@ -85,6 +117,9 @@ export const AdminLogin = () => {
         <img className="logo" alt="ZYPPR Trades" src={logo} />
         
         <h1 className="title">Admin Log In</h1>
+        
+        {apiError && <div style={{padding: '12px', marginBottom: '16px', backgroundColor: '#fee', border: '1px solid #fcc', borderRadius: '6px', color: '#c33'}}><span>{apiError}</span></div>}
+        {successMessage && <div style={{padding: '12px', marginBottom: '16px', backgroundColor: '#efe', border: '1px solid #cfc', borderRadius: '6px', color: '#3c3'}}><span>{successMessage}</span></div>}
         
         <form onSubmit={handleSubmit} noValidate>
           <div className="form-group">
@@ -105,16 +140,7 @@ export const AdminLogin = () => {
           </div>
 
           <div className="form-group">
-            <div className="label-row">
-              <label htmlFor="password" className="label">Password</label>
-              <button 
-                type="button" 
-                onClick={handleForgotPassword} 
-                className="forgot-password-link"
-              >
-                Forgot password
-              </button>
-            </div>
+            <label htmlFor="password" className="label">Password</label>
             <input
               type="password"
               id="password"
@@ -130,8 +156,8 @@ export const AdminLogin = () => {
             )}
           </div>
 
-          <button type="submit" className="submit-button">
-            Login
+          <button type="submit" className="submit-button" disabled={isLoading}>
+            {isLoading ? "Logging in..." : "Login"}
           </button>
         </form>
 

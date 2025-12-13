@@ -28,7 +28,9 @@ export const login = async (req, res) => {
     token,
     user: {
       _id: user._id,
-      name: user.name || user.first_name,
+      name: `${user.first_name} ${user.last_name}`.trim(),
+      first_name: user.first_name,
+      last_name: user.last_name,
       email: user.email,
       role: user.role,            // 👈 frontend needs this too
     },

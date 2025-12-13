@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import IMG12581 from "./IMG_1258 1.png";
 import search from "./Search.svg";
 import clipPathGroup from "./Clip path group.png";
@@ -8,6 +9,7 @@ import "./JobSearch.css";
 import "../SharedHeader/SharedHeader.css";
 
 export const JobSearch = () => {
+  const navigate = useNavigate();
   return (
     <div className="job-search">
       <div className="job-search-container">
@@ -21,14 +23,13 @@ export const JobSearch = () => {
                 </svg>
               </button>
 
-              <div className="shared-logo-section">
+              <button className="shared-logo-section" onClick={() => navigate("/")} style={{background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '12px'}}>
                 <img className="shared-logo-image" alt="ZYPPR logo" src={IMG12581} />
                 <h1 className="shared-logo-text">YPPR Trades</h1>
-              </div>
+              </button>
 
               <nav className="shared-main-navigation" aria-label="Main navigation">
-                <button className="shared-nav-link">About ZYPPR</button>
-                <button className="shared-nav-link">Customer Service</button>
+                <button className="shared-nav-link" onClick={() => navigate("/customer-service")}>Customer Service</button>
               </nav>
 
               <div className="shared-header-auth">

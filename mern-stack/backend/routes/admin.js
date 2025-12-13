@@ -55,4 +55,39 @@ router.get("/search/users", async (req, res) => {
   }
 });
 
+/**
+ * Delete duplicate users by name:
+ * DELETE /api/admin/cleanup/duplicates
+ * Body: { first_name: "Shamrit", last_name: "Phagura" }
+ */
+router.delete("/cleanup/duplicates", async (req, res) => {
+  try {
+    const { first_name, last_name } = req.body;
+    
+    if (!first_name || !last_name) {
+      return res.status(400).json({ message: "first_name and last_name are required" });
+    }
+
+    const User = (await import("../models/User.js")).default;
+    
+    // Find all users with this name
+    const users = await User.find({ first_name, last_name });
+    
+    if (users.length === 0) {
+      return res.json({ message: "No users found with that name", deleted: 0 });
+    }
+    
+    // Delete all of them
+    const result = await User.deleteMany({ first_name, last_name });
+    
+    res.json({ 
+      message: `Deleted ${result.deletedCount} user(s) named ${first_name} ${last_name}`,
+      deleted: result.deletedCount 
+    });
+  } catch (err) {
+    console.error("Cleanup error:", err);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
 export default router;

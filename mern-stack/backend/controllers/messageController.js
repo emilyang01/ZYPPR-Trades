@@ -25,9 +25,16 @@ export const sendMessage = async (req, res) => {
 
 export const getMessages = async (req, res) => {
   try {
+    const { userId } = req.params;
+    const currentUserId = req.user.id; // Get from auth middleware (requireAuth sets req.user.id)
+
+    // Get all messages between the two users (both directions)
     const messages = await Message.find({
-      receiverId: req.params.userId,
-    });
+      $or: [
+        { senderId: currentUserId, receiverId: userId },
+        { senderId: userId, receiverId: currentUserId }
+      ]
+    }).sort({ createdAt: 1 }); // Sort by oldest first
 
     res.json(messages);
   } catch (error) {

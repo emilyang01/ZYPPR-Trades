@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import IMG12821 from "./IMG-1282-1.png";
-import IMG12581 from "./IMG-1258-1.png";
+import IMG12581 from "./IMG_1258 1.png";
 import chatCircleDots from "./chat-circle-dots.svg";
 import "./JobDetails.css";
+import "../SharedHeader/SharedHeader.css";
 
 export const JobDetails = () => {
   const navigate = useNavigate();
@@ -99,43 +100,33 @@ export const JobDetails = () => {
     .map((line) => line.trim())
     .filter(Boolean);
 
+  const user = JSON.parse(localStorage.getItem("user") || "{}");
+
   return (
     <main className="job-details">
-      <header className="job-header">
-        <div className="header-content">
-          <button className="back-button" aria-label="Go back" onClick={() => window.history.back()}>
+      {/* Shared Header */}
+      <header className="shared-header">
+        <div className="shared-header-content">
+          <button className="shared-back-button" aria-label="Go back" onClick={() => navigate(-1)}>
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-              <path
-                d="M12.5 15L7.5 10L12.5 5"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
+              <path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
           </button>
 
-          <div className="logo-section">
-            <img className="logo-image" alt="ZYPPR logo" src={IMG12581} />
-            <h1 className="logo-text">YPPR Trades</h1>
-          </div>
+          <button className="shared-logo-section" onClick={() => navigate("/")} style={{background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '12px'}}>
+            <img className="shared-logo-image" alt="ZYPPR logo" src={IMG12581} />
+            <h1 className="shared-logo-text">YPPR Trades</h1>
+          </button>
 
-          <nav className="main-navigation" aria-label="Main navigation">
-            <button className="nav-link" onClick={() => handleNavClick("Jobs")}>
-              Jobs
-            </button>
-            <button className="nav-link" onClick={() => handleNavClick("About ZYPPR")}>
-              About ZYPPR
-            </button>
-            <button className="nav-link" onClick={() => handleNavClick("Customer Service")}>
-              Customer Service
-            </button>
+          <nav className="shared-main-navigation" aria-label="Main navigation">
+            <button className="shared-nav-link" onClick={() => navigate("/jobs")}>Jobs</button>
+            <button className="shared-nav-link" onClick={() => navigate("/customer-service")}>Customer Service</button>
           </nav>
 
-          <div className="header-auth">
-            <button className="user-button">
-              <span>Your Name</span>
-              <div className="avatar" />
+          <div className="shared-header-auth">
+            <button className="job-details-userchip" onClick={() => navigate("/dashboard")}>
+              <span>{userName}</span>
+              <div className="job-details-avatar" />
             </button>
           </div>
         </div>
@@ -144,34 +135,17 @@ export const JobDetails = () => {
       <div className="job-content">
         <article className="job-card">
           <header className="job-card-header">
-            <button className="back-link" aria-label="Go back" onClick={handleBack}>
-              <svg width="16" height="16" viewBox="0 0 20 20" fill="none">
-                <path
-                  d="M12.5 15L7.5 10L12.5 5"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </button>
-
             <h2 className="card-title">Job Details</h2>
-
-            <time className="posted-date">{postedDate ? `Posted on ${postedDate}` : ""}</time>
+            {postedDate && <time className="posted-date">Posted on {postedDate}</time>}
           </header>
 
-          {loading && <div style={{ padding: 12 }}>Loading...</div>}
-          {!loading && errMsg && <div style={{ padding: 12, color: "red" }}>{errMsg}</div>}
-
-          {!loading && job && (
+          {loading && <div className="job-loading">Loading job details...</div>}
+          {!loading && errMsg && <div className="job-error">{errMsg}</div>}
+          {!loading && !errMsg && job && (
             <>
-              <h3 className="job-title">{job.title || "Untitled Job"}</h3>
-
-              <div className="job-info-grid">
+              <div className="job-info-sections">
                 <section className="client-section">
-                  <h4 className="section-heading">Client</h4>
-
+                  <h4 className="section-heading">Client Information</h4>
                   <address className="client-info">
                     <p className="client-name">{clientName}</p>
                     <p className="client-phone"></p>

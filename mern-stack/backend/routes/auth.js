@@ -17,7 +17,7 @@ const sign = (u) =>
 
 // POST /api/auth/register  --------------------------
 router.post("/register", validateRegisterInput, async (req, res) => {
-  const { email, password, name } = req.body;
+  const { email, password, first_name, last_name, name, role } = req.body;
 
   // 🟢 DB READ: check if user exists
   const exists = await User.findOne({ email });
@@ -25,8 +25,17 @@ router.post("/register", validateRegisterInput, async (req, res) => {
     return res.status(409).json({ message: "Email already in use" });
   }
 
+  // Handle both old 'name' format and new 'first_name/last_name' format
+  const userData = {
+    email,
+    password,
+    first_name: first_name || name || 'User',
+    last_name: last_name || 'User',
+    role: role || 'user' // Accept role from request, default to 'user'
+  };
+
   // 🟢 DB WRITE: create user (pre-save hook hashes password)
-  const user = await User.create({ email, password, name });
+  const user = await User.create(userData);
 
   // Create JWT with id + role
   const token = sign(user);
@@ -38,7 +47,8 @@ router.post("/register", validateRegisterInput, async (req, res) => {
       id: user.id,
       email: user.email,
       role: user.role,
-      name: user.name,
+      first_name: user.first_name,
+      last_name: user.last_name,
     },
   });
 });
@@ -68,7 +78,8 @@ router.post("/login", validateLoginInput, async (req, res) => {
       id: user.id,
       email: user.email,
       role: user.role,
-      name: user.name,
+      first_name: user.first_name,
+      last_name: user.last_name,
     },
   });
 });

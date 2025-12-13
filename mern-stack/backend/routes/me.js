@@ -16,7 +16,9 @@ router.get("/me", async (req, res) => {
     id: me._id,
     email: me.email,
     role: me.role,
-    name: me.name,
+    first_name: me.first_name,
+    last_name: me.last_name,
+    name: me.first_name && me.last_name ? `${me.first_name} ${me.last_name}` : me.email,
   });
 });
 

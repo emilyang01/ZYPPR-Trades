@@ -242,14 +242,13 @@ export const UserSearch = () => {
                 </svg>
               </button>
 
-              <div className="shared-logo-section">
+              <button className="shared-logo-section" onClick={() => navigate("/")} style={{background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '12px'}}>
                 <img className="shared-logo-image" alt="ZYPPR logo" src={IMG12581} />
                 <h1 className="shared-logo-text">YPPR Trades</h1>
-              </div>
+              </button>
 
               <nav className="shared-main-navigation" aria-label="Main navigation">
-                <button className="shared-nav-link">About ZYPPR</button>
-                <button className="shared-nav-link">Customer Service</button>
+                <button className="shared-nav-link" onClick={() => navigate("/customer-service")}>Customer Service</button>
               </nav>
 
               <div className="shared-header-auth">

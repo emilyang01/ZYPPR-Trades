@@ -1,6 +1,8 @@
 import React, { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import IMG12581 from "./IMG_1258 1.png";
 import "./PostJob.css";
+import "../SharedHeader/SharedHeader.css";
 
 export const PostJob = () => {
   const navigate = useNavigate();
@@ -66,79 +68,133 @@ export const PostJob = () => {
     }
   };
 
+  const user = JSON.parse(localStorage.getItem("user") || "{}");
+  const userName = user?.name || (user?.first_name && user?.last_name ? `${user.first_name} ${user.last_name}` : user?.email?.split('@')[0] || "User");
+
   return (
     <div className="postjob-page">
-      {/* top header bar */}
-      <header className="postjob-header">
-        <div className="postjob-brand">
-          <span style={{ fontSize: 30 }}>Z</span>
-          <span>YPPR Trades</span>
-        </div>
-
-        <div className="postjob-nav">
-          <button type="button">Jobs</button>
-          <button type="button" className="link">
-            About ZYPPR
+      {/* Header */}
+      <header className="shared-header">
+        <div className="shared-header-content">
+          <button className="shared-back-button" aria-label="Go back" onClick={() => navigate(-1)}>
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
           </button>
-          <button type="button" className="link">
-            Customer Service
-          </button>
-        </div>
 
-        <div className="postjob-userchip">
-          <span>Your Name</span>
-          <div className="postjob-avatar" />
+          <button className="shared-logo-section" onClick={() => navigate("/")} style={{background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '12px'}}>
+            <img className="shared-logo-image" alt="ZYPPR logo" src={IMG12581} />
+            <h1 className="shared-logo-text">YPPR Trades</h1>
+          </button>
+
+          <nav className="shared-main-navigation" aria-label="Main navigation">
+            <button className="shared-nav-link" onClick={() => navigate("/jobs")}>Jobs</button>
+            <button className="shared-nav-link" onClick={() => navigate("/customer-service")}>Customer Service</button>
+          </nav>
+
+          <div className="shared-header-auth">
+            <button className="postjob-userchip" onClick={() => navigate("/dashboard")}>
+              <span>{userName}</span>
+              <div className="postjob-avatar" />
+            </button>
+          </div>
         </div>
       </header>
 
-      {/* main card */}
+      {/* Main Content */}
       <div className="postjob-wrap">
         <div className="postjob-card">
           <div className="postjob-card-header">
-            <button className="postjob-backbtn" onClick={() => navigate(-1)} type="button">
-              &lt;
-            </button>
-            <span>Job Details</span>
+            <h2>Post a Job</h2>
           </div>
 
           <div className="postjob-body">
-            {/* title row */}
-            <div className="postjob-title-row">
-              <input
-                className="postjob-title-input"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-              />
-              {/* if you have an edit icon image, put it here */}
-              {/* <img className="postjob-edit-icon" src={editIcon} alt="edit" /> */}
-            </div>
+            <div className="postjob-form">
+              {/* Job Title */}
+              <div className="postjob-field">
+                <label className="postjob-label">Job Title</label>
+                <input
+                  className="postjob-input"
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                  placeholder="e.g., Kitchen Sink Repair"
+                />
+              </div>
 
-            {/* two columns */}
-            <div className="postjob-grid">
-              {/* left */}
-              <div>
-                <div className="postjob-section-title">Job Info</div>
+              {/* Job Description */}
+              <div className="postjob-field">
+                <label className="postjob-label">Job Description</label>
                 <textarea
                   className="postjob-textarea"
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
+                  placeholder="Describe the job details..."
+                  rows={6}
                 />
               </div>
 
-              {/* right */}
-              <div>
-                <div className="postjob-section-title">Insert Images</div>
+              {/* Category and City Row */}
+              <div className="postjob-row">
+                <div className="postjob-field">
+                  <label className="postjob-label">Category</label>
+                  <select
+                    className="postjob-select"
+                    value={category}
+                    onChange={(e) => setCategory(e.target.value)}
+                  >
+                    <option value="Plumbing">Plumbing</option>
+                    <option value="Electrical">Electrical</option>
+                    <option value="Carpentry">Carpentry</option>
+                    <option value="Painting">Painting</option>
+                    <option value="Landscaping">Landscaping</option>
+                    <option value="Cleaning">Cleaning</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
 
+                <div className="postjob-field">
+                  <label className="postjob-label">City</label>
+                  <select
+                    className="postjob-select"
+                    value={city}
+                    onChange={(e) => setCity(e.target.value)}
+                  >
+                    <option value="Sacramento">Sacramento</option>
+                    <option value="Elk Grove">Elk Grove</option>
+                    <option value="Roseville">Roseville</option>
+                    <option value="Folsom">Folsom</option>
+                    <option value="Davis">Davis</option>
+                  </select>
+                </div>
+              </div>
+
+              {/* Hourly Rate */}
+              <div className="postjob-field">
+                <label className="postjob-label">Hourly Rate ($)</label>
+                <input
+                  className="postjob-input"
+                  type="number"
+                  min="0"
+                  step="1"
+                  value={hourlyRate}
+                  onChange={(e) => setHourlyRate(e.target.value)}
+                  placeholder="60"
+                />
+              </div>
+
+              {/* Images */}
+              <div className="postjob-field">
+                <label className="postjob-label">Job Images (Optional)</label>
                 <div className="postjob-images-row">
-                  <div className="postjob-image-box">
-                    {imageFile?.url ? (
+                  {imageFile?.url && (
+                    <div className="postjob-image-box">
                       <img src={imageFile.url} alt="preview" />
-                    ) : null}
-                  </div>
+                    </div>
+                  )}
 
                   <button
                     type="button"
-                    className="postjob-image-box"
+                    className="postjob-image-box postjob-add-image"
                     onClick={pickImage}
                     aria-label="Add image"
                   >
@@ -153,36 +209,18 @@ export const PostJob = () => {
                     onChange={onFileChange}
                   />
                 </div>
+              </div>
 
-                <div className="postjob-actions">
-                  <div className="postjob-cost">Cost: ${cost}</div>
-                  <button className="postjob-postbtn" onClick={onPost} type="button">
-                    Post
-                  </button>
-                </div>
+              {/* Action Buttons */}
+              <div className="postjob-actions">
+                <button className="postjob-cancel-btn" onClick={() => navigate(-1)} type="button">
+                  Cancel
+                </button>
+                <button className="postjob-post-btn" onClick={onPost} type="button">
+                  Post Job
+                </button>
               </div>
             </div>
-<div style={{ marginTop: 12 }}>
-  <div style={{ fontWeight: 700, marginBottom: 6 }}>Hourly Rate</div>
-  <input
-    type="number"
-    min="0"
-    step="1"
-    value={hourlyRate}
-    onChange={(e) => setHourlyRate(e.target.value)}
-    style={{
-      width: 180,
-      height: 40,
-      border: "1px solid #bdbdbd",
-      padding: "0 12px",
-      fontSize: 18,
-      outline: "none",
-    }}
-  />
-</div>
-
-            {/* hidden fields for now (still posts correct values) */}
-            {/* category/hourlyRate/city already in state */}
           </div>
         </div>
       </div>

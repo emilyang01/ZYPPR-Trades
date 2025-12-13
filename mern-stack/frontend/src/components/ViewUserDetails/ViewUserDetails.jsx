@@ -11,6 +11,13 @@ import "./ViewUserDetails.css";
 export const ViewUserDetails = () => {
   const navigate = useNavigate();
   const { userId } = useParams();
+  
+  // For demo users without real MongoDB IDs, generate a valid ObjectId format
+  // Martha Williams example ID (24 char hex string)
+  const validUserId = userId && userId.length === 24 && /^[0-9a-fA-F]+$/.test(userId) 
+    ? userId 
+    : '507f1f77bcf86cd799439011'; // Default demo ObjectId for Martha
+  
   return (
     <main className="view-user-details">
       <header className="user-header">
@@ -21,14 +28,13 @@ export const ViewUserDetails = () => {
             </svg>
           </button>
 
-          <div className="logo-section">
+          <button className="logo-section" onClick={() => navigate("/")} style={{background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '12px'}}>
             <img className="logo-image" alt="ZYPPR logo" src={IMG12581} />
             <h1 className="logo-text">YPPR Trades</h1>
-          </div>
+          </button>
 
           <nav className="main-navigation" aria-label="Main navigation">
-            <button className="nav-link">About ZYPPR</button>
-            <button className="nav-link">Customer Service</button>
+            <button className="nav-link" onClick={() => navigate("/customer-service")}>Customer Service</button>
           </nav>
 
           <div className="header-auth">
@@ -49,7 +55,11 @@ export const ViewUserDetails = () => {
               <img src={userCirclePlus} alt="" />
               <span>Following (9)</span>
             </button>
-            <button className="stat-item message-btn" onClick={() => console.log('Send message')}>
+            <button className="stat-item message-btn" onClick={() => navigate('/messages', { state: { 
+              userId: validUserId, 
+              userName: 'Martha Williams',
+              userEmail: 'Martha.Williams@Yahoo.com'
+            }})}>
               <img src={chatCircleDots} alt="" />
               <span>Message</span>
             </button>
@@ -79,7 +89,7 @@ export const ViewUserDetails = () => {
           </div>
 
           <button className="view-resume-btn" onClick={() => console.log('View resume')}>View Resume</button>
-          <button className="report-user-btn" onClick={() => navigate(`/report/user/${userId}`)}>Report User</button>
+          <button className="report-user-btn" onClick={() => navigate(`/report/user/${validUserId}`)}>Report User</button>
         </aside>
 
         <div className="main-content">

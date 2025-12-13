@@ -69,15 +69,14 @@ export const Reviews = () => {
               <path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
           </button>
-          <div className="logo-section">
+          <button className="logo-section" onClick={() => navigate("/")} style={{background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '12px'}}>
             <img className="logo-image" alt="ZYPPR logo" src={IMG12581} />
             <h1 className="logo-text">YPPR Trades</h1>
-          </div>
+          </button>
 
           <nav className="main-navigation" aria-label="Main navigation">
             <button className="nav-link" onClick={() => navigate("/jobs")}>Jobs</button>
-            <button className="nav-link">About ZYPPR</button>
-            <button className="nav-link">Customer Service</button>
+            <button className="nav-link" onClick={() => navigate("/customer-service")}>Customer Service</button>
           </nav>
 
           <div className="auth-buttons">

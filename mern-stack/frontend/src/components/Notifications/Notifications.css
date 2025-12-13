@@ -1,0 +1,181 @@
+.notifications {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  width: 100%;
+  background-color: #0b6fff;
+  padding: 2rem;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.notifications__back-btn {
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.notifications__back-btn:hover {
+  opacity: 0.8;
+}
+
+.notifications__card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 2rem 2.5rem;
+  width: 100%;
+  max-width: 560px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.notifications__header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.notifications__title {
+  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #000000;
+  margin: 0;
+}
+
+.notifications__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.notifications__item {
+  display: flex;
+  align-items: center;
+  padding: 1.25rem 0;
+  border-top: 1px solid #e5e5e5;
+  gap: 1rem;
+}
+
+.notifications__item:first-child {
+  border-top: none;
+}
+
+.notifications__item-icon {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.notifications__item-text {
+  flex: 1;
+  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  color: #000000;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.notifications__item-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.25rem;
+  flex-shrink: 0;
+}
+
+.notifications__item-time {
+  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: #000000;
+  white-space: nowrap;
+}
+
+.notifications__item-more {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.6;
+}
+
+.notifications__item-more:hover {
+  opacity: 1;
+}
+
+/* Read/unread states */
+.notifications__item {
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.notifications__item:hover {
+  background-color: #f8f9fa;
+}
+
+.notifications__item--read {
+  opacity: 0.7;
+}
+
+.notifications__item--read .notifications__item-text {
+  color: #666666;
+}
+
+/* Loading, error, and empty states */
+.notifications__loading,
+.notifications__error,
+.notifications__empty {
+  text-align: center;
+  padding: 3rem 1rem;
+  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 1rem;
+  color: #666666;
+}
+
+.notifications__error {
+  color: #dc3545;
+}
+
+.notifications__empty {
+  color: #999999;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .notifications {
+    padding: 1rem;
+  }
+
+  .notifications__back-btn {
+    top: 1rem;
+    left: 1rem;
+  }
+
+  .notifications__card {
+    padding: 1.5rem;
+  }
+
+  .notifications__title {
+    font-size: 1.5rem;
+  }
+
+  .notifications__item-text {
+    font-size: 0.9rem;
+  }
+}
